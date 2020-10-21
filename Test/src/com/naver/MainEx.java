@@ -1,6 +1,29 @@
 package com.naver;
 
 public class MainEx {
+	
+	int c;
+	
+	public MainEx() {
+		boolean b = false;
+		c = 44;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public static void main(String[] args) {
 		int a = 10; //변수 a를 선언하면서 10으로 초기화.
 		System.out.println(a);
@@ -13,6 +36,7 @@ public class MainEx {
 		
 		int c = 0;
 		c=44;
+		
 		System.out.println("==========");
 		LocalEx localEx = new LocalEx(); // 참조자료형 호출
 		System.out.println("===========");
