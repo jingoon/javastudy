@@ -254,65 +254,93 @@ stack : 힙 메모리의 주소 값(int형) // 인트 자료형 변수 선언의
 heap : 객체(참조자료형의 값) // new MerhodTest();
 Dog d = c; (이렇게 주소값만 넘겨줄 수도 있다)
 
-생성자 : public className(){ } 디폴트 생성자 // 객체를 생성
-메서드 : publric void Name(){ } 무반환 무파람 메서드 // 객체의 기능
-객체의 기능, 행위, 능력을 의미(java에서는 함수), 중복 코드를 묶어주는 역할
+생성자 
+-> public className(){ } 디폴트 생성자 // 객체를 생성
 
-메서드 선언공식
-접근제한자 반환형 메서드명(파라미터자료형 파라미터변수) { 메서드 호출 시 실행 코드}
-ex)생성자[MethodTest()] public void callName(String name) { System.out.println(name); }
----> 메인 클레스에서 호출
-ex) MethodTest m1 = new MethoTest();
-     m1.cllName("홍길동");
+메서드 
+-> publric void Name(){ } 무반환 무파람 메서드 // 객체의 기능
+-> 객체의 기능, 행위, 능력을 의미(java에서는 함수), 중복 코드를 묶어주는 역할
 
-메서드의 종류
-1. 무반환 무파람 : void, 파라미터가 ( )
-2. 호출 
- 2.1 같은 class : callName("홍길동);
- 2.2 다른 class : 객체생성 MethodTest m1 = new MethoTest(); 후 callName("홍길동);
---------------------------------------------------------------------------------------------수정
-literal : 상수, 대입의 대상이 될 수 없다.
-
-반환형: 반환되는 데이터의 자료형
-void: 반환형이라 하고, 반환되는 데이터의 자료형을 의미한다
-void는 반환되는 데이터가 없다는 것을 의미한다.
-
-******
-메서드 선언공식
-접근제한자 반환형 메서드명(파마리터자료형 파라미터변수){ 메서드 호출 시 실행 코드 }
-
-메서드의 종류
-1, 무반환 무파람
- 생성예제 작성
-
- 호출 예제
- 1) 같은 클레스에서 me1();
- 2) 다른 클레스에서 객체생성(변수선언하듯) 후 객체명.me1();
-
-2. 무반환 유파람(이름을 넣는다)
--  MethodTest 에서
- callNeme(String a) 메서드 생성 파라미터에 자료형과 변수명을 넣는다.
-- MainEx에서 
- MethodTest mt1 = new MethodTest(); // 객체 생성
-  mt1.callName(자료형에 맞는값); // 메서드 호출
-******
-
+ex)
 public class MethodTest {
-public MethodTest() {} --> 생성자
+public MethodTest() {} --> 객체 생성, 생성자
 public void sleep(){} --> 객체 선언, 메소드
-무반환(void) 무파람(괄호가비어있음)
-public: 접근제한자로 프로젝트 전체에서 sleep메서드가 호출될 수 있음을 의미함
-void: 반환형이라 하고, 반환되는 데이터의 자료형을 의미한다.void는 반환되는 데이터가 없다는 것을 의미한다.
-sleep: 메서드의 이름이고, 나중에 메서드를 호출할 때 그 이름을 적어줌으로써 메서드 본문 안에 있는 코드를 실행하게함
-(): 파라미터, 매개변수 선언하는 곳으로 마치 변수를 선언하듯 작성하면 됨. 파라미터가 두개 이상일 때는 ,를 구분자로 해서 구분함
-{}: 메서드의 본문. 메서드 호출 때 실행하고 싶은 코드를 작성함
-}
-메서드 호출: 메서드를 사용하는 것을 의미. 
--> 메서드명을 적고 소괄호, 그 소괄호 안에 파라미터의 자료형에 맞는 값을 넣어줍니다.
-MethodTest mt1 = new MethodTest(); ->객체 선언 , 메소드
-mt1.sleep();
+                          --> 무반환(void) 무파람(괄호가비어있음)
+public (접근제한자)
+-> 프로젝트 전체에서 sleep메서드가 호출될 수 있음을 의미
 
-05---------------------------------------------------------------------------------------------
+void (반환형: 반환되는 데이터의 자료형) 
+-> 반환되는 데이터가 없다는 의미
+
+sleep (메서드의 이름) 
+-> 메서드 호출 시, 이름을 적음으로 메서드 본문 코드를 실행하게함
+
+( ) (파라미터, 매개변수 선언하는 곳)
+-> 변수를 선언하듯 작성. 파라미터가 두개 이상일 때는 ,를 구분자로 구분
+
+{} (메서드의 본문)
+-> 메서드 호출 때 실행하고 싶은 코드 작성
+}
+
+
+메서드 선언공식
+접근제한자 반환형 메서드명(파라미터자료형 파라미터변수) { 
+	메서드 호출 시 실행 코드
+}
+ex) 메서드 선언
+public MethodTest(){
+	 public void callName(String name) { 
+	 System.out.println(name);
+	 }
+}
+ex) 메인 클레스에서 호출
+ MethodTest m1 = new MethoTest();
+ m1.cllName("홍길동");
+
+
+메서드의 종류
+
+1. 무반환(void) 무파람 : void, 파라미터가 ( )
+ //메서드 생성 ex)
+public void callName(){
+     System.out.println("무변환 무파람");
+}
+
+2. 메서드 호출 
+-> 메서드를 사용하는 것을 의미
+-> 메서드명을 적고 소괄호, 그 소괄호 안에 파라미터의 자료형에 맞는 값을 입력
+
+ 2.1 같은 class 호출 : 메서드명() 
+-> ex) callName();		// 메서드 호출
+
+ 2.2 다른 class 호출 : 객체생성 후 객체명.메서드명();
+-> ex) MethodTest mt = new MethodTest();  //객체 생성
+         mt.callName();			// 메서드 호출
+
+3. 무반환 유파람(파라미터 있음)
+
+3.1 메서드 생성
+ class [ MethodTest ]에서 printScore(String name) 메서드 생성 
+-> 메서드 파라미터에 자료형(String)과 변수명(name)을 작성
+
+// 메서드 생성 ex)
+public void printScore(String name, int score){
+     System.out.println(name + " " + score + "점")
+}
+
+3.2 메서드 호출
+ 객체 생성 후
+mt.printScore(자료형에 맞는 값)	//메서드 호출 (자료형에 맞는값)
+
+// 메서드 호출 ex)
+1) 같은 class
+﻿printScore("홍길동", 100);
+
+2) 다른 class
+MethodTest mt = new MethodTest(); //객체 생성
+mt.﻿printScore("홍길동", 100); // 메서드 호출﻿
+
+05--------------------------------------------------------------------------------------------
 
 개념 참고 http://tcpschool.com/java/intro
 
@@ -320,18 +348,19 @@ mt1.sleep();
 객체(변수) = 실체
 변수 = 구성요소(핸들, 이름), 
 메서드 = 기능,능력(가속하기)
-생성자 = 객체 선언, 객체의 맴버변수의 초기화
+생성자(constructor) = 객체 선언, 객체의 맴버변수의 초기화, 리턴값 없음(void 안쓴다)
 지역변수 = 외부에서 접근불가, 보안에 강하다
-멤버변수 = 외부에서 접근가능
-
+멤버변수(field) = 외부에서 접근가능
+매개변수(parameter) = 메서드에 넘겨줄 값, ()안에 기술
 값을 반환 return (반환자료형에 맞는 값);
+
 3. 유반환 무파람
-3.1 참조자료형 반환
+3.1 참조변수 반환
 public Test12 getTest12() {			//Test12(반환자료형)
 		return new Test12();
 	}
 
-MethodTest3 mt7 = new MethodTest3();	//클래스이름 객체변수명 = new 클래스이름(생성자)
+MethodTest3 mt7 = new MethodTest3();	//클래스이름 객체변수명 = new 클래스이름(생성자) -->인스턴스(객체)생성
 		Test12 re4 = mt7.getTest12();	// 반환자료형 변수명 = 객체변수명.메서드명
 
 3.2 기본자료형 반환
@@ -339,12 +368,147 @@ public int getTest13() {
 		return 99;
 	}
 
-MethodTest3 mt8 = new MethodTest3();
+MethodTest3 mt8 = new MethodTest3();	//인스턴스(객체) 생성, 클래스가 메모리에 생성
 		int re5 = mt8.getTest13();
 
+
+06--------------------------------------------------------------------------------------------------------------------
+- TEST -
+
+1. 자료형의 종류를 기술하시오.
+자료형은 기본자료형과 참조자료형으로 나뉜다
+참조자료형은 기본자료형을 제외한 자료형이다
+기본자료형은 8가지로 boolean, char, byte, short, int, long, float, double이 있다
+
+2. 정수형 변수 a에 자료형에 맞는 값 중 하나를 적으시오.
+-33
+
+3. long 형에 맞는 값 중 하나를 적으시오.
+2400000000L
+
+4. float 형에 맞는 값을 하나 적으시오.
+3.14f
+
+5. boolean  형에 맞는 값 두 개르를 적으시오.
+true
+false
+
+6. char 형에 맞는 값을 하나 적으시오.
+'a'
+
+7. Dog형에 맞는 값을 하나 적으시오.
+new Dog()
+
+8. String 형에 맞는 값을 하나 적으시오.
+"홍길동"
+
+9. Cat형에 맞는 값을 하나 적으시오.
+new Cat()
+
+10. Pig형에 맞는 값을 하나 적으시오.
+new Pig()
+
+11. Car형에 맞는 값을 하나 적으시오.
+new Car()
+
+12. Apple형에 맞는 값을 하나 적으시오.
+new Apple()
+
+13. 클래스 Dosirak의 디폴터 생성자를 적으시오.
+public Dosirak(){
+}
+
+14. 클래스 Gost의 디폴터 생성자를 적으시오.
+public Gost(){
+}
+
+15. 클래스 Member의 디폴터 생성자를 적으시오.
+public Member(){
+}
+
+16. 무반환 무파람 메서드 showMetheMoney( )를 작성하고 호출 코드도 작성하시오.
+     - 단, 실행 내용은 "500원" 출력
+     - 단, showMetheMoney( )는 Bank클래스의 메서드이다.
+
+public Bank(){	
+}
+public void showMetheMoney(){
+	System.out.println("500원");
+}
+
+main에서 호출
+Bank bank = new Bank();
+bank.showMetheMoney();
+
+17. 무반환 유파람 메서드 setName( )를 작성하고 호출 코드도 작성하시오.
+    - 단, 실행 내용은 this.name = name;		//지역변수와 멤버변수가 같을 때 지역변수가 우선(그래서 this.을 사용)
+    - 단, setName( )는 Member클래스의 메서드이다.
+
+String name;		// 필드에 선언
+public Member(){
+	 
+}
+public void setName(String name){
+	this.name = name;		//this는 객체 자기자신을 의미
+}
+
+main에서 호출
+Member member = new Member();
+member.setName("홍길동");
+
+18. 유반환 무파람 메서드 getBoard( )를 작성하고 호출 코드도 작성하시오.
+    - 단, 실행 내용은 Board클래스의 객체를 반환한다.
+    - 단, getBoard( )는 Board클래스의 메서드이다.
+
+public Board(){
+}
+
+public Board getBoard(){
+	return new Board();
+}
+
+main에서 호출
+Board board = new Board();
+Board b1 = board.getBoard();
+
+- TEST End -
+
+
 4. 유반환 유파람
+private String carName; 
+field(멤버변수)는 private로 선언 외부에서 접근 불가
+외부에서 접근하기 위해 get~, set~ 메서드 필요
+get, set 메서드는 이클립스에서 마우스 우클릭(source - Generate Getters and Setters) 에서 해당 필드 체크
+혹은 직접입력
+public String getCarName() {
+		return carName;
+	}
+
+public void setCarName(String carName) {
+		this.carName = carName;
+	}
+
+파라미터 입력, 리턴 (기능수행) 반환
+
+get(리턴) . 값을 받을 변수 선언
+파라미터가 있음으로 동적실행가능(입력값이 변함)
+메서드 기본 4유형
+메서드 호출 방법
+
+public void me1(){
+
+}
+
 5. 메서드 오버로링
 
+같은 클래스, 메서드 이름과 같음, 
+
+오버로딩과 오버라이딩의 차이
+
+﻿
+
+
+﻿
 
 
 
