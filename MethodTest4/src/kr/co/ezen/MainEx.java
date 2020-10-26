@@ -24,8 +24,6 @@ public class MainEx {
 		System.out.println(d1.getAge());
 		System.out.println();
 		
-		Dog d2= drms.getDog();
-		System.out.println(d2.getAge());
 	}
 
 }
