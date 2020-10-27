@@ -1,26 +1,42 @@
 package com.ezen;
 
 public class Dog {
-	String name;
-	int age;
+
+	private String name;
+	private int age;
+	private boolean no;
+	
 	public Dog() {
-		
+		// TODO Auto-generated constructor stub
+		no = false;
 	}
 	
-	public void me1() {
-		
-	}
-	public void me2(String name, int age) {
+	Dog dog1 = new Dog("Áøµ¾°³", 2);
+	
+	
+	public Dog(String name, int age) {
+		super();
 		this.name = name;
 		this.age = age;
-		
 	}
-	public Dog me3() {
-		return new Dog();
+
+	public String getName() {
+		return name;
 	}
-	public int me4(String name) {
-		int size = 0;
-		return size;
+
+	public void setName(String name) {
+		this.name = name;
 	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+	
+	
+	
 
 }

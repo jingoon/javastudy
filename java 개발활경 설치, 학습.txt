@@ -441,16 +441,16 @@ Bank bank = new Bank();
 bank.showMetheMoney();
 
 17. 무반환 유파람 메서드 setName( )를 작성하고 호출 코드도 작성하시오.
-    - 단, 실행 내용은 this.name = name;		//지역변수와 멤버변수가 같을 때 지역변수가 우선(그래서 this.을 사용)
+    - 단, 실행 내용은 this.name = name;		
     - 단, setName( )는 Member클래스의 메서드이다.
 
-String name;		// 필드에 선언
+private String name;		// 필드에 선언
 public Member(){
 	 
 }
 public void setName(String name){
 	this.name = name;		//this는 객체 자기자신을 의미
-}
+}				//지역변수와 멤버변수가 같을 때 지역변수가 우선(그래서 this.을 사용)
 
 main에서 호출
 Member member = new Member();
@@ -475,6 +475,7 @@ Board b1 = board.getBoard();
 
 
 4. 유반환 유파람
+
 private String carName; 
 field(멤버변수)는 private로 선언 외부에서 접근 불가
 외부에서 접근하기 위해 get~, set~ 메서드 필요
@@ -490,28 +491,368 @@ public void setCarName(String carName) {
 
 파라미터 입력, 리턴 (기능수행) 반환
 
-get(리턴) . 값을 받을 변수 선언
 파라미터가 있음으로 동적실행가능(입력값이 변함)
-메서드 기본 4유형
-메서드 호출 방법
 
-public void me1(){
+// 메서드 기본 4유형 
+	
+	// 1. void(return 값 없음), 매개변수 없음
+	public void me1() {
+		
+	}
+	
+	// 2. void(return 값 없음), 매개변수 있음
+	public void me2(String name, int age) {
+		
+	}
+	
+	// 3. return(참조자료형) 있음, 매개변수 없음
+	public Dog me3() {
+		return new Dog();
+	}
+	
+	// 4.return(정수형) 있음, 매개변수 있음
+	public int me4(String name) {
+		int size = name.length();
+		return size;
+	}
 
-}
+// 메서드 4유형 호출
+		
+	Dog hot = new Dog();
+		
+	// 1. void(return 값 없음), 매개변수 없음
+	hot.me1();
+		
+	// 2. void(return 값 없음), 매개변수 있음
+	hot.me2("핫도그", 2);
+		
+	// 3. return(참조자료형) 있음, 매개변수 없음
+	Dog hotDog = hot.me3();
+		
+	// 4.return(정수형) 있음, 매개변수 있음
+	int gotDog1 = hot.me4("갓도그");
+	int gotDog2 = hot.me4(new String("갓도그"));
+	
+
+07-------------------------------------------------------------------------------
 
 5. 메서드 오버로링
 
-같은 클래스, 메서드 이름과 같음, 
+* 파라미터의 개수or자료형or순서가 다르면 성립*
 
-오버로딩과 오버라이딩의 차이
+5.1 선결 조건(and)
+- 같은 클래스에서 생선된 메서드
+- 메서드의 이름이 같을 것
+* 파라미터의 개수or자료형or순서가 다르면 성립*
+- 접근제한자, 반환형, 파라미터의 변수명, 메서드 본문내용은 관련 없음
 
-.6 생성자
+5.2 메서드 오버로딩 성립 조건(or)
+- 파라미터(매개변수)의 개수가 다르면 성립
+	public void m1(){}
+	public void m1(int a){}
+- 파라미터의 개수가 같고, 파라미터의 자료형이 다르면 성립
+	public void m1(int a, long b){}
+	public void m1(int a, dog c){}
+- 파라미터의 개수가 같고, 파라미터의 자료형도 같을 때 파라미터 자료형의 배치 순서가 다르면 성립 
+	public void m1(int a dog c){}
+	public void m1(dog c, int a){}
 
-﻿
+5.3 메서드 오버로딩을 사용
+- 메서드들의 전반적인 기능이 같은데 파라미터의 자료형이 다를 때
+- 장점: 메서드 호출 시 파라미터의 자료형에 구애받지 않고 호출
+
+==메서드 오버로딩 Vs 메서드 오버라이딩에 대해 설명.
+
+6. 메서드 오버라이딩 (추후에)
+- 상속 관계가 성립하는 두 클래스에서 자식 클래스가 부모 클래스의 메서드 내용을 재정의 하는 것을 의미
+- 재정의: 수정/삭제/추가 
+
+==오버로딩과 오버라이딩의 차이
+
+﻿+ 생성자
+- class의 field를 초기화하는 class의 구성요소
+- new 생성자(); 호출할 때 마다 객체 생성(객체 = 변수명 = 레퍼런스)
+- 접근제한자 생성자명(){}  // 생성자명은 클래스명과 같다,
+- [Ctrl + Space + Enter 디폴트생성자]
+- 디폴트 생성자와 사용자 생성자로 나눈다
+
++ 디폴트 생성자
+- 파라미터가 없는 생성자
+- 클래스에 생성자가 없으면, 디폴트 생성자 제공
+- 클래스에 사용자 생성자가 있으면, 디폴트 생성자 미제공
+super(); // 생략되어있음.(보이지 않지만 존재)
+
++ 사용자 생성자
+- 파라미터가 있는 생성자
+- 우클릭(Shift + Alt + S) Source - Generate - Constructor - Using - fields - 체크
+*사용자 생성자가 있으면 디폴트 생성자는 지원되지 않음
+
++생성자의 기능
+- 클래스 멤버변수 초기화
+- 참조자료형의 자료형에 맞는 값을 제공
+
+- 반환형이 없다
+- Ctrl + Space로 바로 만들 수 있다
+
++ 생성자 공식
+접근제한자 생성자명(){}
+
+this.변수명
+- 해당 클래스의 field를 가르킴
+- 지역변수와 field가 같을 때 지역변수를 우선인식해서 this.를 쓴다
+this()
+- 다른 생성자 호출
+- 생성자가 오버로딩되면 생성자 간의 중복 코드가 발생할 때 사용
+- 초기화 내용을 한 생성자에 몰아서 작성
+- this(변수1, 변수2, 변수3....);
+- 생성자 본문 첫 줄에서만 사용가능(그래서 메소드호출이 더 많이 사용됨)
+
+﻿생성자 선언에 다른 생성자가 들어갈 경우
+연습 문제)1
+
+public Person(String name, String ssn, String address, int dateOfBirth, Car car, Dog dog, Cat cat) {
+	...	this.car = car;
+		this.dog = dog;
+		this.cat = cat;
+
+Person park = new Person("박씨", "m-01", "경기도", 901223, new Car("승용차"),new Dog(), new Cat());
+
+연습 문제)2
+Person kim1 = new Person("s01", new String("kim"), 44, "서울", "lec", new Dog("개똥이", 55, "개주인"), null);
+		Person park = new Person("a12", "박", 31, "서울", "학생", new Dog("멍멍이", 3, "주인박씨"), null);
+		park.setAge(99);
+		park.getDog().dogInfo();
+		
+		park.setDog(new Dog("두부", 5, "박씨"));
+		park.getDog().setName("잔디");
+		String dogName = park.getDog().getName();
+		System.out.println(dogName);
+		park.getDog().dogInfo();
+		kim1.getDog().dogInfo();
+			
+
+11.26) 08-------------------------------------------------------------------------------------------------
+
+= 클래스의 구성 요소 =
+- 멤버 변수
+ 필드영역에서는 변수 대입이 불가.
+ 필드영역에서는 메서드 호출 불가.
+
+- 생성자
+
+- (멤버) 메서드
+ 메서드 영역에서 메서드 생성 불가.(호출은 가능)
+
+* 멤버변수나 메서드를 호출(사용)하려면, 반드시
+객체(=해당 변수나 메서드를 포함하고 있는 참조자료형 변수)가 있어야 한다.
+
+1. 생성자의 역할
+- 멤버 변수의 초기화
+- 객체(=참조자료형의 변수)의 생성 때, 자료형에 맞는 값으로 사용됨.
+- Ctrl + Space로 바로 만들 수 있다
+
+2. 멤버 변수의 역할
+- 객체의 구성요소를 표현
+
+3. 지역 변수
+- 메서드 안에서 중복되는 값을 표현(수정 용의)
+
+4. 메서드의 역할
+- 객체의 기능(능력)을 표현
+- 클래스 안에서 중복되는 값들(복수형)을 표현
+
+5. 디폴트 생성자(무조껀 만든다)
+- 사용자 생성자가 없을 때는 존재
+- 사용자 생성자가 있을 때는 없다
+
+6. this
+- 객체 자기자신
+- 지역 변수와 멤버 변수가 이름이 같으면 지역변수를 우선인식하기 때문에 사용
+- this.멤버변수
+
+this( ) 
+- 생성자 호출
+- 해당 클래스 안에서만
+- 다른 생성자의 첫번째 라인에서만 호출 -> 대신 메서드를 사용, 제약이 없음
+
+=========
+
+= 객체와 클래스
+
+Object = 자바의 최상위 부모클래스
+
+객체 = object(오브젝트) = instance(인스턴스) [= bean(빈) = entity = domain]
+
+1. 객체는 명사다.
+ - 한라산
+ex) Mountain hanlasin = new Mountatin("한라산");
+
+ - 자동차
+ex) Car bmw = new = Car();
+
+2. heap 메모리에 저장된 데이터
+
+3. 실체
 
 
-﻿
+4. 객체 생성법
+- 참조자료형 변수명(=객체명=레퍼런스) = new 생성자();
+5. 객체 사용법
+- 객체가 갖고 있는 자원(변수, 메서드)을 사용하는 방법
+-> 객체명.변수명
+-> 객체명.메서드명()
+
+= 클래스(= 객체의 설계도)
+
+1. 객체의 구성 요소를 표현한 자료
+2. 객체 생성법을 표현한 자료
+3. 객체의 기능을 표현한 자료
+
+4. 설계도
+ex) 붕어빵틀(클래스) : 붕어빵(객체)
+ex) 자동차설계도(클래스) : 자동차(객체)
+
+5. 클래스의 구성 요소
+멤버 필드(변수/상수), 생성자, 메서드
+
+6. 클래스는 단독으로 실행되지 않는다. 
+ -> 객체를 생성하여 작업할 수 있다.
+
+7. class 키워드가 있어야 클래스이다.
 
 
+09----------------------------------------------------------------------
+
+String
+charAt(int ide) = 인덱스, 문자열의 n번째
+ex) charAt(0)
+-> String charCap = captain.getK7().getModelName();
+		char c = charCap.charAt(0);
+
+// 멤버1이 갖고 있는 개를 외부에서 입력하는 개로 변경
+	public void changeMember1Dog(Dog dog) {
+		member1.setHappy(dog);
+	}
+// 멤버1이 갖고 있는 개의 이름을 외부에서 입력하는 이름으로 변경
+	public void changeMember1DogName(String dogName) {
+		member1.getHappy().setName(dogName);
+	}
+
+인스턴스 변수
+새로운 객체 생성시 만들어진 변수
+객체가 만들어질 때 마다 새로만들어짐
+각각 고유한 값을 갖는다
+
+new Date(n)
+1970년 1월 1일 0시 0분 0초 000 --> date(0)
+1970년 1월 1일 0시 0분 0초 001 -->1
+1970년 1월 1일 0시 0분 1초 000 -->1000
+
+new Date()
+현재시각
+
+new Date(Calendar.getInstance().getTimeInMillis())
+현재시각(수정가능)
+
+
+aTeam.fight(bteam); 
+
+-> fight에 밑줄
+-> 먼저 선언후 creat method 'fightMem3(bteam)' in Type 'Team'
+
+===
+연습문제)
+public void fight(Team otherteam) {
+		String aTeamCaptainName = this.captain.getName();	//호출한 메서드
+		String bTeamCaptainName = otherteam.captain.getName();
+		System.out.println(aTeamCaptainName+"과 "+ bTeamCaptainName+"이 싸운다");
+
+System.out.println("활로 " +mon.toString()+" 를 공격합니다.");
+-> mom (mom.toString() 이 생략되어있다)
+	
+
+		Monster mon = new Monster();
+		Bow bow = new Bow();
+		
+		Hero hero = new Hero(bow);
+				
+		hero.attack(mon);
+		hero.attack(mon);
+		
+		
+		Sword sword = new Sword();
+		hero.attack(sword, mon);
+		hero.attack(mon);
+		
+		Spear spear = new Spear();
+		
+	//	hero = new Hero(spear);
+		
+		hero.setSpear(spear);	//창spear을 추가해줌
+	//	hero.setBow(bow);
+		
+	//	hero.attack(spear, mon);
+		hero.attackSpear(mon);
+		hero.attack(mon);
+
+====
+
+= 연산자 =
+- 연산 기호
+
+사칙연산
+-> +, -, *, /
+
+산술연산자
++, -, *, /, %
+
++ 문자열 연산이 가능
+
+/ 나누기(몫)연산자
+0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3.... (0~/4)
+0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,3,... (0~/5)
+i/n(테이블 개수,)
+같은 숫자가 n번 반복되면 /연산자
+
+% 나머지연산자
+0,1,2,3,0,1,2,3,0,1,2,3....	(0~%4)
+0,1,2,3,4,0,1,2,3,4,0,1,2...	(0~%5)
+특정 범위의숫자가 계속 반복되면 %연산자
+반복되는 숫자 중에서 가장 큰 수 +1
+배수 구할 대 사용함(나머지가 0이면 배수)
+기러기 날개짓 이미지(01230123...)
+
+대입복합연산자
+ 대입연산자
+=
+대입연산자는 항상 오른쪽에 있다
+
+ 복합연산자(산술연산자+대입연산자)
++=, -=, *=, /=, %=
+
+a+=b -> a = a+b;
+b+=a -> b = b+a;
+a*=b -> a= a*b;
+a/=b -> a= a/4;
+a%=b -> a= a%b;
+
+에러 메세지
+
+java.lang.NullPointerException 객체가 만들어 지지 않았는데 자원에 접근하려 할 때 에러
+*자원 = 변수, 상수, 메서드
+ArithmeticException. : / by zero . 수치를 0으로 나눴을 때 에러
+
+ 
+스위치
+0과 1을 반복. a = 1 - a ;
+
+
+
+
+
+
+
+
+	
 
 

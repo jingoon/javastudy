@@ -54,8 +54,8 @@ public class Person {
 	
 	public void sleep(String where) {
 		
-		happy.sleep(where);
-		System.out.println(where);
+		String happySleep= happy.sleep(where);
+		System.out.println(happySleep);
 		
 	}
 	public void run(int speed) {
