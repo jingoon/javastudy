@@ -98,7 +98,7 @@ System.out.println(jin3+jin3);		//출력 22
 - char : 한 글자
  (char = '한';)
 
-- 정수형(값의 범위가 중요)
+- 정수형(값의 범위가 중요), 형변환 (자료형)값 으로 사용 할 수 있다.
 byte	(1byte=8bit)	-128~127	
 short	
 int	(4byte)		-21억~+21억 	42억(2의 32승)
@@ -631,7 +631,7 @@ Person kim1 = new Person("s01", new String("kim"), 44, "서울", "lec", new Dog(
 		kim1.getDog().dogInfo();
 			
 
-11.26) 08-------------------------------------------------------------------------------------------------
+10.26) 08-------------------------------------------------------------------------------------------------
 
 = 클래스의 구성 요소 =
 - 멤버 변수
@@ -721,7 +721,7 @@ ex) 자동차설계도(클래스) : 자동차(객체)
 7. class 키워드가 있어야 클래스이다.
 
 
-09----------------------------------------------------------------------
+10.27)09----------------------------------------------------------------------
 
 String
 charAt(int ide) = 인덱스, 문자열의 n번째
@@ -739,7 +739,7 @@ ex) charAt(0)
 	}
 
 인스턴스 변수
-새로운 객체 생성시 만들어진 변수
+새로운 객체 생성시 힙메모리에 만들어진 변수
 객체가 만들어질 때 마다 새로만들어짐
 각각 고유한 값을 갖는다
 
@@ -795,10 +795,38 @@ System.out.println("활로 " +mon.toString()+" 를 공격합니다.");
 		hero.attackSpear(mon);
 		hero.attack(mon);
 
-====
+ex) 클레스 내부에서 같은 클래스 호출 가능 aTeam, bTeam
+main
+aTeam.fight(bteam);
+class
+public class Team {
+	
+	private Person captain;
+	private Person member1;
+	private Person member2;
+	
+	public Team() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	public Team(Person captain, Person member1, Person member2) {
+		super();
+		this.captain = captain;
+		this.member1 = member1;
+		this.member2 = member2;
+	}
+public void fight(Team otherteam) {
+		// TODO Auto-generated method stub
+		String aTeamCaptainName = this.captain.getName();	//호출한 메서드
+		String bTeamCaptainName = otherteam.captain.getName();
+		System.out.println(aTeamCaptainName+"과 "+ bTeamCaptainName+"이 싸운다");
+		
+	}
+}
 
-= 연산자 =
-- 연산 기호
+
+=== 연산자
 
 사칙연산
 -> +, -, *, /
@@ -806,30 +834,42 @@ System.out.println("활로 " +mon.toString()+" 를 공격합니다.");
 산술연산자
 +, -, *, /, %
 
-+ 문자열 연산이 가능
++
+문자열 연산이 가능
 
-/ 나누기(몫)연산자
-0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3.... (0~/4)
-0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,3,... (0~/5)
-i/n(테이블 개수,)
-같은 숫자가 n번 반복되면 /연산자
+-
+a = 1 - a ; 를 이용해 스위치 연산 가능
 
-% 나머지연산자
-0,1,2,3,0,1,2,3,0,1,2,3....	(0~%4)
-0,1,2,3,4,0,1,2,3,4,0,1,2...	(0~%5)
-특정 범위의숫자가 계속 반복되면 %연산자
-반복되는 숫자 중에서 가장 큰 수 +1
+/ 
+나누기(몫)연산자
+0000111122223333... -> i++ 일때 i/n(반복되는 수의 개수0000->4개) +k시작값
+	시작이 1이나 2로 시작하면 i/n+k , i/n+1, i/n+2..
+	ex) 222333444555... -> i/3+2
+	ex) 778899101011... -> i/2+7
+	ex) 15,15,15,15,16,16,16,16... -> i/4+15
+**같은 숫자가 n번 반복되면 /연산자
+
+% 
+나머지연산자
+012345012345012345... -> i++ 일때 (i%n(반복되는 증가값의 개수012345->5개)) +k(시작값)
+	시작이 1이나 2로 시작하면 (i%n)+시작값, (i%n)+2...	
+	ex) 56789/5678956789... -> (i%5)+5
+	ex) 9,10,9,10,9,10... ->(i%2)+9
+	ex)73,74,75,76,77,73,74,75,76,77... ->(i%/5)+73
+**특정 범위의숫자가 계속 반복되면 %연산자
+반복되는 구간 숫자의 개수n
 배수 구할 대 사용함(나머지가 0이면 배수)
 기러기 날개짓 이미지(01230123...)
+소수를 구할때 사용한다(소수: 1과 자기자신을 제외한 약수가 없는 수)
 
-대입복합연산자
- 대입연산자
+
+=== 대입연산자
 =
 대입연산자는 항상 오른쪽에 있다
 
  복합연산자(산술연산자+대입연산자)
 +=, -=, *=, /=, %=
-
+(a연산자b -> a = a 연산자 b)
 a+=b -> a = a+b;
 b+=a -> b = b+a;
 a*=b -> a= a*b;
@@ -842,17 +882,201 @@ java.lang.NullPointerException 객체가 만들어 지지 않았는데 자원에
 *자원 = 변수, 상수, 메서드
 ArithmeticException. : / by zero . 수치를 0으로 나눴을 때 에러
 
- 
-스위치
-0과 1을 반복. a = 1 - a ;
+10.28)10------------------------------------------------------------------------
 
+=== 비교 연산자
+-> >, <, <=, >, >=, ==, !==
+-> 연산 결과는 true, false (boolean)
+-> 좌측을 기준으로 사용한다. ex)a>b, a는 b보다 크다.
 
+> 크다 | a>b -> a는 b보다 크다 (좌측 우선)
 
+>= 크거나 같다
 
+< 작다
 
+<= 작거나 같다
 
+== 같다 | a==b a는 b는 같다
 
+!= 안 같다
 
+* ==이나 !=은 boolean형 값을 비교 할 수 있다.
+(true,false는 <,>등 크기비교는 안되지만 ==, != 는 할 수 있다.)
+
+=== 논리 연산자
+-> &&, ||, !
+-> 연산 결과는 true, false (boolean)
+
+&&	
+앤드앤드(그리고) 연산에 참여한 데이터 모두가 true 이면 true, 나머지는 false
+ a && b		t2.k1(true, true); --> true
+		t2.k1(true, false); ->false
+		t2.k1(false, true); ->false
+		t2.k1(false, false) ;->false
+
+||	
+오아오아(또는) 연산에 참여한 데이터 모두가 false 이면 false 나머지 true
+ a || b		t2.k2(true, true); -> true
+		t2.k2(true, false); -> true
+		t2.k2(false, true); -> true
+		t2.k2(false, false); -->false
+
+!	
+낫(아니,반대) true는 false로 false는 true로 바뀐다.
+ !a		a = true; --> false
+		a = false; --> true
+
+===
+
+=== 스위치 연산
+-> 두 값을 실행 할 때 마다 번갈아 가며 값이 나온다.
+-> 초기값이 0 or  1, true or false 이어야 한다
+
+public class Test2 {
+	private int a=0;
+	private boolean b;
 	
+	public void switchBoolean() {
+		b=!b;
+		System.out.println(b);
+	}
+	
+	public void switchInt() {
+		a= 1-a;
+		System.out.println(a);
+		
+	}
+}
+	t2.switchInt();
+	t2.switchInt();	= 0과 1을 번갈아 출력
+		
+	t2.switchBoolean();
+	t2.switchBoolean();	= true와 false를 번걸아 출력
+
+
+=== 증감 연산자(단항 연산자)
+++ --
+
+++a;
+++이  변수 앞에 오면, 변수의 값이 1만큼 증가
+그리고 그 증가된 값은 곧바로 변수에 대입
+
+b++;
+++이 변수 뒤에 오면, 변수의 값이 1만큼 증가
+그러나 그 증가된 값은 나중에 해당 변수를 호출할 때 대입된다.
+
+1++ = 1
+++1 = 2
+ex)
+		int p=0;
+		int k =0;
+		System.out.println(p);
+		System.out.println(p = p++);
+		System.out.println(p = ++p);
+		System.out.println(p);
+		0
+		0
+		1
+		1
+--> p=p++와 ++p를 같이 사용하면 p++가 적용되지 않음
+		
+		System.out.println(p);
+		System.out.println(p++);
+		System.out.println(++p);
+		System.out.println(p);
+		0
+		0
+		2
+		2
+--> 단항 연사자로 사용 하면 p++가 적용
+		int p=0;
+		int k =0;
+		System.out.println(k);
+		System.out.println(k = p++);
+		System.out.println(k = ++p);
+		System.out.println(k);
+		0
+		0
+		2
+		2
+--> k=p++과 ++p를 사용하면 적용됨
+a= a++;과 같이 사용하지 않는다.
+
+
+while(참이면 계속)
+~ 하는 동안
+++i를 사용 (while)
+i++를 사용 (for)
+
+=== 조건 연산자(삼항 연산자)
+-> 조건문 보다 연산 속도가 빠르지만 가독성이 떨어져 유지보수가 힘들다.
+
+변수명= a > b ? true일때 : false일때;
+(자료형) 변수명 = 조건식(이 참인가) ? 참일때의값(or변수or반환형이있는메서드): 거짓일때의값(or변수or반환형이있는메서드);
+조건식 -> 결과값이 true와 false
+
+ex) 		int aa=3;
+		int bb=5;
+		int c = aa==bb ? 44 : 33;
+		syso(c); -> 33
+ex)
+		/* 
+		a와 b는 멤버변수.
+	   	변수 c는 
+		a가 b보다 크거나 같으면 'a'
+		그렇지 않으면 'z'를 갖는다
+		변수 c를 선언하시오
+		*/
+		char c = a>=b ? 'a' : 'z';
+
+
+c언어..
+비트 연산자)
+->0과 1을 사용
+
+& 
+엔드 -> 2진수로 변환하여 1,1 이면 1 , 나머지는 0 그 2진수를 다시 10진수로 변환한 값
+|
+오어 -> 2진수로 변환하여 0,0 이면 0, 나머지는 1 그 2진수를 다시 10진수로 변환한 값
+^
+익스클레시브 오어(베타적 오어,xor) -> 같으면 0, 다르면 1 (두 값이 같은지 판별할 때)
+~
+부호 반전(낫) ->	양수에서 음수 : +1
+		음수에서 양수 : -1
+ex)	 ~(00000000 00000000 00000000 00001110)
+	== 10000000 00000000 00000000 00001110 
+
+시프트 연산자
+>>
+라이트 시프트 연산자. 숫자가 줄어든다 -> 2진수로 변환하여 오른쪽으로 한칸씩 옮겨진다. 2^n 승으로 나눔(나머지 버림)
+ex)		  i >> n ==  i/2^n
+		111000 >> 2 == 1110(2진수)
+		14 >> 1 == 7 
+		14 >> 2 == 3
+		
+<<
+숫자가 증가한다 -> 2진수로 변환하여 왼쪽으로 한칸식 옮겨진다. 3*2^n승
+ex) 		 i << n == i*(2^n)
+		111000 << 2 == 11100000(2진수)
+		3 << 1 == 6
+		3 << 2 == 12
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- 조건문 내일
+
+
 
 
