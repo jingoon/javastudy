@@ -1068,6 +1068,7 @@ ex) 		 i << n == i*(2^n)
 10.29)11-------------------------------------------------------------------------------------
 
  조건문
+
 [if else]
 
 단순 if문(if)
@@ -1089,7 +1090,7 @@ if(조건식1){
 }else if(조건식2){
 	실행2 : 조건2가 참이었을 때, 실행2
 }else{
-	실행3 : 조건1과 조건2를 만족하지 않았을 때
+	실행3 : 조건1과 조건2(위의 모든 조건)를 만족하지 않았을 때
 }
 실행1,2,3 중 하나만 실행하고 if문 밖 다른 걸 수행
 조건식 실행부분에 return; // 해당 메서드를 바로 종료 
@@ -1099,7 +1100,7 @@ ex)
 		if(!power) {
 			return; //해당 메서드 종료
 		}
-		--ch;			//return을 실행 했다면 아래 --증감연산자와 if은 사용하지 않음
+		--ch;	//return을 실행 했다면 아래 --증감연산자와 if은 사용하지 않음
 		if(power&&ch<0) {
 			ch=999;
 		}
@@ -1108,10 +1109,23 @@ ex)
 [switch ~ case]
 
 연산자를 사용하지 않음
-==을 수행함
+내부적으로 ==을 수행함
 key == value (키와 벨류가 같나 비교)
 
 switch 컨트롤 + 스페이스
+switch(변수 또는 변수 연산){
+	case 값1:
+		변수 == 값1일 때, 실행할 코드
+		break; //break는 상황에 따라 운용하라.
+ 			//break는 switch~case문을 빠져나가라는 의미
+	case 값2:
+		변수 == 값2일 때, 실행할 코드
+		break;
+
+	default:
+		모든 조건이 false일 때, 실행할 코드
+		break;
+}
 switch (key) { /*코드입력불가*/
 /*코드입력불가*/	case value:
 			
@@ -1138,6 +1152,7 @@ value
 이 뒤에 실행문 입력
 
 default:
+모든 조건이 일치하지 않을 때
 if문의 else와 같다
 
 break;
@@ -1146,9 +1161,9 @@ break;
 브레이크 생략 가능
 생략하면 다음 브레이크 까지 참인 조건문 실행
 
-break와 return의 차이점
-break는 해당 스위치를 빠져나오고 해당 메서드 다음 기능 수행
-return은 해당 메서드를 종료. return 후술 기능 수행하지 않음
+break;와 return;의 차이점
+break;는 해당 스위치를 빠져나오고 해당 메서드 다음 기능 수행
+return;은 해당 메서드를 종료. return; 후술 기능 수행하지 않음
 
  알고가기_ 알고리즘
 치환 알고리즘
@@ -1163,119 +1178,69 @@ ex) sum += a;
 클래스 내에서 각 메서드 중에 중복되는 코드가 있으면 -> 메서드(함수역할)
 프로젝트 내에서 각 클래스 중에 중복되는 코드가 있으면 -> 상속
 
-12---------------------------------------------------------------------------------------------------
+10.30)12---------------------------------------------------------------------------------------------------
 
-
-
-
-내일 반복문 for, while을 구분해서 사용
-
-[[[ 연습문 제 if, method  ]]]
-TV
-	- vol, ch, power
-	+ volUp,Down, chUP,Down, power
--->	0<= ch <=999 순환 999다음 0 
--->	0<= vol <=100 100위로,0아래로 갈 수 없음.
--->추가 	전원이 꺼지면 ch, vol 이동불가
--->추가	파워를 스위치연산으로 켜고 끄기 a=1-a;
-Person
-	-  tv1
-	+ tvOn, tvoff
-
-==>	kim 객체 생성. tv를 켜고 꺼라
-	tv켜고, 채널을 올려라.
-	현재채널을 확인해라
-	현재볼륨을 확인해라
-	볼륨을 50으로 변경해라
-
-[[ 연습문제 switch ]]
- if(범위){return;을 사용하여 메서드 종료조건로 사용할 수 있다.}
-
-1.스위치 달력
-변수를 입력받아. 28,30,31일 까지 있는 달을 구분하기
-각 몇달 몇일까지 인지 출력
-(브래이크 생략 사용)
--->추가 0이하 이거나 13이상 입력받으면 불가 메시지 출력
-
-2.스위치 성적
-성적을 입력받아 수,우,미,양,가,를 출력
--->추가 0~100을 벗어났을때 처리
-
-package com.naver;
-
-public class SwitchTest {
-	
-	public SwitchTest() {
-		// TODO Auto-generated constructor stub
+return의 사용
+- 값의 반환 ex) return a;
+- 메서드의 종료 ex) return;
+ex)
+메서드{
+	if(조건){
+	retrun;
 	}
-	
-	public void month(int month) {
-		if(month<=12 && month>0) {
-			switch (month) {
-			case 2:
-				System.out.println(month+"월은 28일");
-				break;
-			case 4:
-			case 6:
-			case 9:
-			case 11:
-				System.out.println(month+"월은 30일");
-				break;
-			default:
-				System.out.println(month+"월은 31일");
-				break;
-			}
-		}else {
-			System.out.println("1년은 1~12월까지 있음");
-		}
-	}
-	
-	public void monthFor() {
-		for(int i=1;i<13;i++) {
-			month(i);
-		}
-		
-	}
-	
-	public void studentScore(int score){
-		char result = '수';
-		if(score<=100 &&score>=0) {
-			switch (score/10) {
-			case 10:
-			case 9:
-				result = '수';
-				break;
-			case 8:
-				result ='우';
-				break;
-			case 7:
-				result = '미';
-				break;
-			case 6:
-				result = '양';
-				break;
-			case 5:
-				result = '가';
-				break;
-			}
-			System.out.println(result);
-		}else {
-			System.out.println("성적은 0~100점까지로 ");
-		}
-	}
+	메서드 실행1
+	메서드 실행2
+	...
+}
+리턴으로 메서드 종료조건(or실행조건)을 만들 수 있다.
+ex) 	파워메서드가 펄스이면, 볼륨메서드는 실행하지 않는다.
+	파워가 트루일때 볼륨을 실행한다. 
 
-	
+반복문
+특정 코드들을 반복
+
+for문
+for(초기화; 조건식; 증감식){
+ 실행문
 }
 
+for문 연산 순서 : 
+초기화 -> 조건식 -> 
+(실행 -> 증감식 -> 조건식) -> 
+(실행 -> 증감식 -> 조건식) ->
+(실행 -> 증감식 -> 조건식) ->....(조건이 만족하지 않을때 빠져나옴)
+초기화는 1회 후
+조건식이 맞지 않으면 바로 나옴
+조건식이 맞으면 실행문
+실행문 다음에는 초기화로 가지 않고 증감식으로 간다.
+그리고 다시 조건식으로 true, false를 판단
+
+for문의 조건식
+true이면 실행문으로  false이면 if문을 빠져나옴
+반복횟수를 의미함
+ex) (i=0;i<10;i++) 10번
+
+증감식의 종류에 따라 < , >=를 주로 사용
+++이면 i<n;
+-- 이면 i>=n;
+
+소수
+:1과 자기자신 외에는 약수가 없는 수
+(n%n==0 && n%1==0) 만 있어야 소수
+소수를 판별 하려면
+n%i~n ==0 인것이 자기자신일 경우(1은 초기화값에서 제외)
 
 
 
 
 
+do ~ while
+코드가 만족하지 않아도 1번 실행 후 종료
 
-
-
-
+while(참이면 계속)
+~ 하는 동안
+++i를 사용 (while)
+i++를 사용 (for)
 
 
 
@@ -1294,43 +1259,81 @@ java.lang.NullPointerException 객체가 만들어 지지 않았는데 자원에
 ArithmeticException. : / by zero . 수치를 0으로 나눴을 때 에러
 
 === 스위치 연산
--> 두 값을 실행 할 때 마다 번갈아 가며 값이 나온다.
--> 초기값이 0 or  1, true or false 이어야 한다
+두 값을 실행 할 때 마다 번갈아 가며 값이 나온다.
+초기값이 0 or  1, true or false 이어야 한다
+(boolean a)	a = !a;
+(int a)		a = 1-a;	
 
-public class Test2 {
-	private int a=0;
-	private boolean b;
-	
-	public void switchBoolean() {
-		b=!b;
-		System.out.println(b);
+
+
+연습문제]]]]
+
+1~n까지 소수 찍기
+소수
+:1과 자기자신 외에는 약수가 없는 수
+(n%n==0 && n%1==0) 만 있어야 소수
+소수를 판별 하려면
+n%i~n ==0 인것이 자기자신일 경우(1은 초기화값에서 제외)
+public void isSossu2(int num) {
+		for(int i=2;i<num;i++) {
+			if(num%i==0) {
+				System.out.println("소수아님");				
+				break;
+			}else if(i==num-1) {
+				System.out.println("소수임");
+			}
+		}
 	}
-	
-	public void switchInt() {
-		a= 1-a;
-		System.out.println(a);
-		
+public void isSossu3(int num) {
+		for(int i=2;i<num;i++) {
+			if(num%i==0) {
+				System.out.println("소수아님");
+				break;
+			}else if(num-1==i) {
+				System.out.println("소수임");
+			}
+		}
 	}
-}
-	t2.switchInt();
-	t2.switchInt();	= 0과 1을 번갈아 출력
+
+피보나치 ?찍기
+1.별찍기 1.2.3.4.5.4.3.2.1 / 파라미터 받아서. 메소드 호출.
+public void star(int num) {
+		for(int i=0; i<num;i++) {
+			System.out.print('*');
+		}
+		System.out.println();
+	}
+public void halfDimond(int n) {
 		
-	t2.switchBoolean();
-	t2.switchBoolean();	= true와 false를 번걸아 출력
+		for(int i =0;i<n;i++) {
+			if(i+1<n/2) {
+				m5(i+1);
+			}else {
+				m5(n-i-1);
+			}
+		}
+	}
+가로 별 10개찍기 해서 불러오기
 
-while(참이면 계속)
-~ 하는 동안
-++i를 사용 (while)
-i++를 사용 (for)
+2.책받침 구구단 가로 5단씩 
+public void gugudan2(int n) {
+		for(int i=0;i<10;i++) {
+			for(int j=1;j<5;j++) {
+				System.out.print(j+"x"+i+"="+j*i+"\t");
+			}
+			
+			System.out.println();
+		}
+		System.out.println("----");
+		for(int i=0;i<10;i++) {
+			for(int j=5;j<10;j++) {
+				System.out.print(j+"x"+i+"="+j*i+"\t");
+			}
+			System.out.println();
+		}	
+	}
 
-
-
-
-
-
-
-
-
+어떻게 하면 포문을 메서드화해서 묶을 수 있을까?
 
 
 
