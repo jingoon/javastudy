@@ -131,15 +131,20 @@ public class Test {
 	}
 		
 	public void gugudan2(int n) {
-		dan2(4);
-		System.out.println();
-		dan2(5);
+		for(int j=1;j<10;j++) {
+			dan2(2, 6, j);			//k단 부터 n-1단 까지 (j곱)
+		}
+			System.out.println();
+		for(int j=1;j<10;j++) {
+			dan2(6,10,j);			//5~10-1단까지(j곱)
+		}
+		
 	}
 	
-	public void dan2(int n) {
+	public void dan2(int k,int n,int j) { // k~n까지
 		
-			for(int i=1;i<n;i++) {
-				System.out.print(i+"x"+n+"="+i*n+"\t");
+			for(int i=k;i<n;i++) {
+				System.out.print(i+"x"+j+"="+j*i+"\t");
 			}
 			System.out.println();
 			
@@ -170,6 +175,39 @@ public class Test {
 				m5(num-i-1);
 			}
 			
+		}
+	}
+	
+	public void me7(int num) {   
+		for(int i=0;i<10;i++){
+			if(num%3==0) {		//num값이 3의 배수이면 for문 실행 안함
+				System.out.println("3의 배수가 검출, 가장 가까운 반복문중단.");
+				break;
+			}
+		}
+	}
+	
+	public void me71() {
+		for(int i=10;i>=0;i--) {
+			System.out.println("외부for문 시작");
+			
+			for(int j =100; j<105;j++) {
+				if(i%2==0) {			//i값이 2의 배수이면 for(j)문 실행 안함
+					break;
+				}
+				System.out.println(i+":"+j);
+			}
+			System.out.println("외부for문 종료");
+			System.out.println();
+		}
+		System.out.println("111");
+	}
+	public void me8() {
+		for(int i=0;i<10;i++) {
+			if(i%5==0){			// for문 중 i가 5의 배수일 때 for문 중 그 회차만 실행 안함
+				continue;
+			}
+			System.out.println(i);
 		}
 	}
 	

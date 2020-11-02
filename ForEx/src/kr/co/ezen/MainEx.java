@@ -30,8 +30,14 @@ public class MainEx {
 	//	t1.halfDimond(8);
 		t1.gugudan2(10);
 		t1.isSossu3(18);
-		t1.dimond2(20);
-		t1.dan2(9);
+		t1.dimond2(10);
+		Test t2 = new Test();
+		t2.me7(6);
+		t2.me71();
+		t2.me8();
+	
+		
+		
 		
 	
 		

@@ -1,6 +1,6 @@
 java 개발환경 설치. + 학습
 
-01--------------------------------------------------------------------------------------------
+001--------------------------------------------------------------------------------------------
 
 1. jdk 설치
 -> 자바 개발환경 설정, 설치 
@@ -60,7 +60,7 @@ githubstudy - javastudy 에 파일 넣기
 cmd에서javastudy이동 파일 add, commit, push 
 깃허브 로그인
 
-02---------------------------------------------------------------------------------------
+002---------------------------------------------------------------------------------------
 
  변수!!
 -----
@@ -136,7 +136,7 @@ float보다 double이 더 정밀하다
 float는 마지막에 f/F를 적는다
 double는 실수형의 기본자료형이다
 
-03 -------------------------------------------------------------------------------------------
+003 -------------------------------------------------------------------------------------------
 
 참조자료형(reference type)의 변수 선언
 
@@ -216,10 +216,13 @@ char는 빈칸
  - 변수를 선언할 때 값을 같이 입력해주는 것
  - 초기화 예제) int a =3;
  - 초기화를 하지 않은 예제) int = b;
+*멤버변수초기화는 생성자 안에서만 한다.
 4. 멤버변수의 개념
  - 클래스의 멤버로 선언된 변수
  - 생성자나 메서드의 밖에서 선언된 변수
  - 클래스 전체에서 사용
+ - 일반적으로 private 으로 선언함.
+ - private: 같은 클래스에서만 접근가능
 5. 멤버변수의 일반적인 사용
  -초기화하지 않고 선언만 함
  - int a;
@@ -242,7 +245,7 @@ char는 빈칸
 void =반환값이 없을 때
 반환형 : 반환되는 데이터(값)의 자료형
 
-04----------------------------------------------------------------------------------
+004----------------------------------------------------------------------------------
 
 static(특별함?)
 literal: 상수, 대입의 대상이 될수 없다.
@@ -340,7 +343,7 @@ mt.printScore(자료형에 맞는 값)	//메서드 호출 (자료형에 맞는�
 MethodTest mt = new MethodTest(); //객체 생성
 mt.﻿printScore("홍길동", 100); // 메서드 호출﻿
 
-05--------------------------------------------------------------------------------------------
+005--------------------------------------------------------------------------------------------
 
 개념 참고 http://tcpschool.com/java/intro
 
@@ -372,7 +375,7 @@ MethodTest3 mt8 = new MethodTest3();	//인스턴스(객체) 생성, 클래스가
 		int re5 = mt8.getTest13();
 
 
-06--------------------------------------------------------------------------------------------------------------------
+006--------------------------------------------------------------------------------------------------------------------
 - TEST -
 
 1. 자료형의 종류를 기술하시오.
@@ -534,7 +537,7 @@ public void setCarName(String carName) {
 	int gotDog2 = hot.me4(new String("갓도그"));
 	
 
-07-------------------------------------------------------------------------------
+007-------------------------------------------------------------------------------
 
 5. 메서드 오버로링
 
@@ -576,35 +579,36 @@ public void setCarName(String carName) {
 - [Ctrl + Space + Enter 디폴트생성자]
 - 디폴트 생성자와 사용자 생성자로 나눈다
 
++생성자의 기능
+- 클래스 멤버변수 초기화
+- 참조자료형의 자료형에 맞는 값을 제공
+- 반환형이 없다
+
 + 디폴트 생성자
 - 파라미터가 없는 생성자
 - 클래스에 생성자가 없으면, 디폴트 생성자 제공
 - 클래스에 사용자 생성자가 있으면, 디폴트 생성자 미제공
 super(); // 생략되어있음.(보이지 않지만 존재)
+- Ctrl + Space로 바로 만들 수 있다
 
 + 사용자 생성자
 - 파라미터가 있는 생성자
 - 우클릭(Shift + Alt + S) Source - Generate - Constructor - Using - fields - 체크
 *사용자 생성자가 있으면 디폴트 생성자는 지원되지 않음
 
-+생성자의 기능
-- 클래스 멤버변수 초기화
-- 참조자료형의 자료형에 맞는 값을 제공
-
-- 반환형이 없다
-- Ctrl + Space로 바로 만들 수 있다
-
 + 생성자 공식
 접근제한자 생성자명(){}
+-생성자명은 클래스명과 같다
 
 this.변수명
-- 해당 클래스의 field를 가르킴
+- 해당 클래스의 field를 가르킴(객체 자기 자신)
 - 지역변수와 field가 같을 때 지역변수를 우선인식해서 this.를 쓴다
 this()
 - 다른 생성자 호출
 - 생성자가 오버로딩되면 생성자 간의 중복 코드가 발생할 때 사용
 - 초기화 내용을 한 생성자에 몰아서 작성
 - this(변수1, 변수2, 변수3....);
+- this(); 디폴트 생성자 호출
 - 생성자 본문 첫 줄에서만 사용가능(그래서 메소드호출이 더 많이 사용됨)
 
 ﻿생성자 선언에 다른 생성자가 들어갈 경우
@@ -631,7 +635,7 @@ Person kim1 = new Person("s01", new String("kim"), 44, "서울", "lec", new Dog(
 		kim1.getDog().dogInfo();
 			
 
-10.26) 08-------------------------------------------------------------------------------------------------
+10.26)008-------------------------------------------------------------------------------------------------
 
 = 클래스의 구성 요소 =
 - 멤버 변수
@@ -701,12 +705,14 @@ ex) Car bmw = new = Car();
 - 객체가 갖고 있는 자원(변수, 메서드)을 사용하는 방법
 -> 객체명.변수명
 -> 객체명.메서드명()
+-> 객체명.상수명;
+- 같은 객체를 여러번 호출 하여 사용할 수 있다.
 
 = 클래스(= 객체의 설계도)
 
-1. 객체의 구성 요소를 표현한 자료
-2. 객체 생성법을 표현한 자료
-3. 객체의 기능을 표현한 자료
+1. 객체의 구성 요소를 표현한 자료 - 멤버변수/상수
+2. 객체 생성법을 표현한 자료 - 생성자
+3. 객체의 기능을 표현한 자료 - 메서드
 
 4. 설계도
 ex) 붕어빵틀(클래스) : 붕어빵(객체)
@@ -719,9 +725,10 @@ ex) 자동차설계도(클래스) : 자동차(객체)
  -> 객체를 생성하여 작업할 수 있다.
 
 7. class 키워드가 있어야 클래스이다.
+ (상속에서 익명의 내부클래스가 있다, class키워드가 없는 익명)
 
 
-10.27)09----------------------------------------------------------------------
+10.27)009----------------------------------------------------------------------
 
 String
 charAt(int ide) = 인덱스, 문자열의 n번째
@@ -840,6 +847,9 @@ public void fight(Team otherteam) {
 -
 a = 1 - a ; 를 이용해 스위치 연산 가능
 
+*
+연산후 자료형의 표현범위를 넘는지 검사해야 한다
+
 / 
 나누기 연산자
 0000111122223333... i/n+k
@@ -880,7 +890,7 @@ a*=b -> a= a*b;
 a/=b -> a= a/4;
 a%=b -> a= a%b;
 
-10.28)10------------------------------------------------------------------------
+10.28)010------------------------------------------------------------------------
 
 === 비교 연산자
  >, >= , <, <= , == , !==
@@ -933,6 +943,7 @@ a%=b -> a= a%b;
 
 
 === 증감 연산자(단항 연산자)
+1씩 증가, 1씩 감소
 ++ --
 
 ++a;
@@ -953,40 +964,11 @@ a= t + 1++ , syso(a) => 6
 ﻿1++ = 1
 ++1 = 2
 
-ex)
-		int p=0;
-		int k =0;
-		System.out.println(p);
-		System.out.println(p = p++);
-		System.out.println(p = ++p);
-		System.out.println(p);
-		0
-		0
-		1
-		1
---> p=p++와 ++p를 같이 사용하면 p++가 적용되지 않음
-		
-		System.out.println(p);
-		System.out.println(p++);
-		System.out.println(++p);
-		System.out.println(p);
-		0
-		0
-		2
-		2
---> 단항 연사자로 사용 하면 p++가 적용
-		int p=0;
-		int k =0;
-		System.out.println(k);
-		System.out.println(k = p++);
-		System.out.println(k = ++p);
-		System.out.println(k);
-		0
-		0
-		2
-		2
---> k=p++과 ++p를 사용하면 적용됨
 a= a++;과 같이 사용하지 않는다.
+
+a--;
+스위치
+
 
 === 조건 연산자(삼항 연산자)
  조건문 보다 연산 속도가 빠르지만 가독성이 떨어져 유지보수가 힘들다.
@@ -1009,7 +991,11 @@ ex)
 		*/
 		char c = a>=b ? 'a' : 'z';
 
-비트 연산자)
+변수명 = 조건식1? 참일때의값: 조건식2?:참일때의값2:조건1,2,가 모두 거짓일때의 값;
+-> 다중 if문과 같이 표현할 수도 있다
+ 조건문 보다 연산 속도가 빠르지만 가독성이 떨어져 유지보수가 힘들다.
+
+=== 비트 연산자
 0과 1을 사용
 
 ﻿&
@@ -1065,7 +1051,7 @@ ex) 		 i << n == i*(2^n)
  비트연산자4 & | ^ ~
  시프트연산자2 >> << 
 
-10.29)11-------------------------------------------------------------------------------------
+10.29)011-------------------------------------------------------------------------------------
 
  조건문
 
@@ -1109,8 +1095,9 @@ ex)
 [switch ~ case]
 
 연산자를 사용하지 않음
-내부적으로 ==을 수행함
-key == value (키와 벨류가 같나 비교)
+- 내부적으로 ==을 수행함
+- key == value (키와 벨류가 같나 비교)
+int, String, enum 자료형만 사용가능
 
 switch 컨트롤 + 스페이스
 switch(변수 또는 변수 연산){
@@ -1178,7 +1165,7 @@ ex) sum += a;
 클래스 내에서 각 메서드 중에 중복되는 코드가 있으면 -> 메서드(함수역할)
 프로젝트 내에서 각 클래스 중에 중복되는 코드가 있으면 -> 상속
 
-10.30)12---------------------------------------------------------------------------------------------------
+10.30)012---------------------------------------------------------------------------------------------------
 
 return의 사용
 - 값의 반환 ex) return a;
@@ -1199,7 +1186,12 @@ ex) 	파워메서드가 펄스이면, 볼륨메서드는 실행하지 않는다.
 반복문
 특정 코드들을 반복
 
+break: 가장 가까운 반복문을 빠져나감.
+continnue: 가장 가까운 반복문의 해당 회차만 빠져나감 (증감식으로 감.)
+
 for문
+- 몇회 반복할지 알고 있을 때 사용.
+
 for(초기화; 조건식; 증감식){
  실행문
 }
@@ -1224,23 +1216,199 @@ ex) (i=0;i<10;i++) 10번
 ++이면 i<n;
 -- 이면 i>=n;
 
+다중 for문은
+ for문을 메서드로 호출해서 구현
+
 소수
 :1과 자기자신 외에는 약수가 없는 수
 (n%n==0 && n%1==0) 만 있어야 소수
 소수를 판별 하려면
 n%i~n ==0 인것이 자기자신일 경우(1은 초기화값에서 제외)
 
+[연습문제]
+1. 소수 검사
+ 1과 자기자신 외에는 약수가 없는 수
+(n%n==0 && n%1==0) 만 있어야 소수
+소수를 판별 하려면
+n%i~n ==0 인것이 자기자신일 경우(1은 초기화값에서 제외)
 
+	public void sossu(int num) {// 정수 넘겨 받기
+		for(int i=2;i<num;i++) {// 2 ~ num 바로 앞 숫자 까지 약수확인(1과 자기 자신 빼고 검사)
+			if(num%i==0) {		// 나머지가 0이면 약수
+				System.out.println(num+"은 소수 아님");//약수면 소수아님
+				break;			//약수를 찾으면 else if는 패스
+			}else if(i==num-1) {//약수가 없을 때 넘 바로 앞까지 다 검사한건가?
+				System.out.println(num+"은 소수 이다.");//약수가 없다면 소수
+			}
+		}
+	}
 
+2. 피라미드 찍기
+2.1 정수를 넘겨받아 '*'를 n개 출력
+2.2 첫번째 줄 1개 두번째2개 3번째 3개 ... n번째 n개 출력
+2.3 1개 부터 점점 증가해서 n번째 부터 1개까지 감소하게 출력
+
+	public void star(int num) {			//2.1
+		for(int i=0;i<num;i++) {
+			System.out.print('*');
+		}
+		System.out.println();
+	}
+	
+	public void star2(int num) {		//2.2
+		for(int i=0;i<num;i++) {
+			star(i+1);
+		}
+	}
+	
+	public void star3(int num) {		//2.3
+		for(int i=0;i<(num*2);i++) {
+			if(i+1<num/2) {
+				star(i+1);
+			}else {
+				star(num-i-1);
+			}
+		}
+	}
+
+3. 구구단 출력
+3.1입력받은 숫자 n단 출력
+3.2 3.1을 호출해서 1~9단까지 출력
+3.3 1~4단까지 가로로 출력 그 아래 5~9단까지 가로로 출력
+
+	public void mTable(int num) {
+		for(int i=1;i<10;i++) {		//곱셈은 1부터
+			System.out.printf("%dX%d=%d%n",num,i,num*i);
+		}
+	}
+	
+	public void mTable2() {
+		for(int i=2;i<10;i++){		//2단 부터
+			System.out.println(i+"단");
+			mTable(i);
+		}
+		
+	}
+	
+	public void mTable3(int k, int n,int j) {  //k~n단까지
+		for(int i=k;i<n;i++) {
+			System.out.print(i+"x"+j+"="+(i*j)+"\t");
+		}
+		System.out.println();
+			
+		
+	}
+	public void mTable4() {
+		for(int j=1;j<10;j++) {
+			mTable3(2, 6, j);	//2~5단까지 
+		}
+		System.out.println();
+		for(int j=1;j<10;j++) {	
+			mTable3(6, 10, j);	//6~9단까지
+		}
+			
+	}
+
+11.02)013-------------------------------------------------------------------------------------------------------------
+
+return; 메서드 중단
+break; 반복문 중단, 조건문 중단
+continue; 해당 반복횟수 중단 후 for(증감식)으로 , while(조건식으로감)
 
 
 do ~ while
 코드가 만족하지 않아도 1번 실행 후 종료
 
-while(참이면 계속)
-~ 하는 동안
-++i를 사용 (while)
-i++를 사용 (for)
+while문
+ (참이면 계속) ~하까지 계속!
+어떤 조건(어떤 값 까지)으로 그만두게 할 것인지 알 때
+1.변수 선언 및 초기화
+2. while(조건식)
+3.{ 트루일 때 실행될 코드
+4. 증감식 }
+whlie문의 증감식은 i값에 대입으로 한다.
+ex)
+	public void dan(int dan) {
+		int i=1;
+		while(i<10) {
+			StringBuffer sd = new StringBuffer(dan);
+			sd.append(dan);						
+			sd.append("x");
+			sd.append(i);
+			sd.append("=");
+			sd.append(dan*i);
+			String msg = sd.toString();
+			System.out.println(msg);		// sd.append(); 가 순서대로 toString();에 들어감	
+	//		System.out.println(dan+"x"+i+"="+i*dan);	이것과 동일
+			i++;
+	}
+
+=== staic
+static 변수(상수/메서드) =(같다) class 변수(상수/메서드) = 정적 변수(상수/메서드)
+
+***(중요) 프로그램이 실행되면, 곧바로 static 영역(메서드(클래스) 메모리)에 로딩이 되어 실행 가능한 상태가 된다
+객체를 선언하지 않고 사용가능.
+
+static 변수, 상수
+- 무조건 1개만 생성(=객체마다 값이 변하지 않는다, 인스턴스변수와의 차이) 
+- (변하지 않는다, 클래스마다 1개씩)
+
+생성공식
+public(접근제한자) static type 변수명;
+ex) public static int a;
+
+접근(호출) 방법
+static 변수
+- class명.변수명
+ex) Test.a = 200; 
+ - Test t1=  new Test();
+ - Test t2 = new Test();
+ -> t1.a 와 t2.a 는 같다 하지만 Test.a로 사용한다. 
+ex) System.out.println();
+
+static 변수 초기화
+- static{ } 만들고 초기화 한다. static초기화 블록
+
+ex)
+	public static String company;
+	private String modelName;
+	
+	static {
+		company = "hyundai";
+	}
+
+	public Sonata() { //생성자.
+	//     company = "이렇게 하지 않음";	
+	}
+
+
+
+static 메서드 생성
+- 바로 사용가능한 변수와 상수만 사용가능(static 변수,상수 , 객체생성후 멤버변수, 메서드)
+- 지역변수는 객체를 생성하고 객체명으로 접근해야 쓸수 있다.
+- 		public static void me1() {
+	//	System.out.println(a);	// a는 객체가 없으면 사용할 수 없어서 static메서드로 바로 사용불가
+		Test t1 = new Test();
+		t1.m2();
+		System.out.println(t1.a); 	// 객체를 생성후 객체명으로 호출한다.
+		System.out.println(Test.b);
+	}
+
+static 메서드 호출 
+- Test.me1();
+
+static 변수가 있을 대 getters,setters
+ex) public class Sonata{
+	public static String company;
+
+	public static String getCompany() {
+		return company;
+	}
+
+	public static void setCompany(String company) {
+		Sonata.company = company;
+     }
+ 
 
 
 
@@ -1248,6 +1416,273 @@ i++를 사용 (for)
 
 
 
+
+
+
+-------------
+내일 배열
+
+
+[[연습문제]]
+my1 //0.1.2.3.4.5...100
+2 // 2.4.6.8...46
+21// 99.97.96.94..21
+dan2// n단 출력 (StringBuffer 사용)
+3// *을 n개 출력
+31// 3을 호출해서 n번째줄 까지 늘어나는 * 출력
+32// 3을 호출해서 n개 까지 늘어나는 홀수 b(char "@")을 출력
+gugudan2// dan2를 호출, 구구단 출력
+gugudan3// 4x4 구구단 출력
+pibo // 1.1.2.3.5.8.13.21... 
+ ->피보나치 수열 출력 n번째 피보나치수p(n) = p(n-1)+p(n-2)
+4//0~9까지 4와 8을 빼고 출력
+40// 소수 검사 하는 메서드
+41// 99~0까지 중 출력, 소수를 만나면 출력 종료
+5//0~9까지 3~6을 빼고 출력
+
+return;
+break;
+continue; 사용
+
+
+구구단2 한번더
+
+	public void me7(int num) {
+		for(int i=0;i<10;i++){
+			if(num%3==0) {
+				System.out.println("3의 배수가 검출, 가장 가까운 반복문중단.");
+				break;
+			}
+		}
+	}
+	
+	public void me71() {
+		for(int i=10;i>=0;i--) {
+			System.out.println("외부for문 시작");
+			
+			for(int j =100; j<105;j++) {
+				if(i%2==0) {
+					break;
+				}
+				System.out.println(i+":"+j);
+			}
+			System.out.println("외부for문 종료");
+		}
+		System.out.println("111");
+	}
+	public void me8() {
+		for(int i=0;i<10;i++) {
+			if(i%5==0){
+				continue;
+			}
+			System.out.println(i);
+		}
+	}
+
+
+
+
+
+
+
+package com.naver;
+
+public class Test2 {
+	public Test2() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	/*
+	 * my1 //0.1.2.3.4.5...10
+	2 // 2.4.6.8...46
+	21// 39.97.96.94..21
+	dan2// n단 
+	3// *을 n개 출력
+	31// 3을 호출해서 n번째줄 까지 늘어나는 * 출력
+	32// 3을 호출해서 n벌째 줄까지 늘어나는 홀수 b(char "@")을 출력
+	gugudan2// dan2를 호출, 구구단 출력
+	pibo // 1.1.2.3.5.8.13.21... 
+	 ->피보나치 수열 출력 n번째 피보나치수p(n) = p(n-1)+p(n-2)
+	 */
+	
+	public void my1() {
+		int i=0;
+		while(i<10) {
+			System.out.println(i);
+			i++;
+		}
+	}
+	public void my2() {
+		int i =0;
+		while(i<47) {
+			System.out.println(i);
+			i+=2;
+		}
+	}
+	public void my21() {
+		int i=39;
+		while(i>=21) {
+			System.out.println(i);
+			i--;
+		}
+	
+	}
+	public void dan2(int dan) {
+		int i=1;
+		while(i<10) {
+			StringBuffer sd = new StringBuffer();
+			sd.append(dan);
+			sd.append("x");
+			sd.append(i);
+			sd.append("= ");
+			sd.append(dan*i);
+			String dan2 = sd.toString();
+			System.out.println(dan2);
+			
+			i++;
+		}
+	}
+	public void my3(int num, String a) {
+		int i =0;
+		while(i<num) {
+			System.out.print(a);
+			i++;
+		}
+		System.out.println();
+	}
+	public void my31(int num) {
+		int i = 0;
+		while(i<num) {
+			my3(i+1,"@");
+			i++;
+		}
+		System.out.println();
+	}
+	
+	public void my32(int num) {
+		int i=0;
+		while(i<num) {
+			if(i%2!=0) {
+			
+			}else {
+				my3(i+1,"#");
+			}
+			i++;
+		}
+	}
+	public void gugudan2() {
+		int i=2;
+		while(i<10) {
+			System.out.println(i+"단" );
+			dan2(i);
+			i++;
+		}
+	}
+	public void pibo() {
+		int a=1;
+		int b=1;
+		int i=0;
+		while(i<15) {
+			int c= a+b;
+			if(i==15-1) {
+				System.out.println(c);
+			}
+			a = b;
+			b = c;
+			
+			i++;
+			
+		//	a b c 
+		//	- a b c
+		//	- - a b c 
+		}
+	}
+	
+	public void my4() {
+		int i=0;
+		while(i<10) {
+			if(i%4==0 || i==0) {
+				i++;
+				continue;
+			}
+			System.out.println(i);
+			i++;
+		}
+	}
+	public int soSSu(int i) {
+		int result=0;
+		
+		return result;
+	}
+	public void my41() {
+		int i=99;
+		while(i>=0) {
+			
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+정보처리기사 실기 알고리즘
 
 https://edu.goorm.io/search?subject=java%20%EC%83%9D%ED%99%9C%EC%BD%94%EB%94%A9&page=1&sort=newest
 실습코딩 인터넷강좌
@@ -1263,82 +1698,6 @@ ArithmeticException. : / by zero . 수치를 0으로 나눴을 때 에러
 초기값이 0 or  1, true or false 이어야 한다
 (boolean a)	a = !a;
 (int a)		a = 1-a;	
-
-
-
-연습문제]]]]
-
-1~n까지 소수 찍기
-소수
-:1과 자기자신 외에는 약수가 없는 수
-(n%n==0 && n%1==0) 만 있어야 소수
-소수를 판별 하려면
-n%i~n ==0 인것이 자기자신일 경우(1은 초기화값에서 제외)
-public void isSossu2(int num) {
-		for(int i=2;i<num;i++) {
-			if(num%i==0) {
-				System.out.println("소수아님");				
-				break;
-			}else if(i==num-1) {
-				System.out.println("소수임");
-			}
-		}
-	}
-public void isSossu3(int num) {
-		for(int i=2;i<num;i++) {
-			if(num%i==0) {
-				System.out.println("소수아님");
-				break;
-			}else if(num-1==i) {
-				System.out.println("소수임");
-			}
-		}
-	}
-
-피보나치 ?찍기
-1.별찍기 1.2.3.4.5.4.3.2.1 / 파라미터 받아서. 메소드 호출.
-public void star(int num) {
-		for(int i=0; i<num;i++) {
-			System.out.print('*');
-		}
-		System.out.println();
-	}
-public void halfDimond(int n) {
-		
-		for(int i =0;i<n;i++) {
-			if(i+1<n/2) {
-				m5(i+1);
-			}else {
-				m5(n-i-1);
-			}
-		}
-	}
-가로 별 10개찍기 해서 불러오기
-
-2.책받침 구구단 가로 5단씩 
-public void gugudan2(int n) {
-		for(int i=0;i<10;i++) {
-			for(int j=1;j<5;j++) {
-				System.out.print(j+"x"+i+"="+j*i+"\t");
-			}
-			
-			System.out.println();
-		}
-		System.out.println("----");
-		for(int i=0;i<10;i++) {
-			for(int j=5;j<10;j++) {
-				System.out.print(j+"x"+i+"="+j*i+"\t");
-			}
-			System.out.println();
-		}	
-	}
-
-어떻게 하면 포문을 메서드화해서 묶을 수 있을까?
-
-
-
-
-
 
 
 
