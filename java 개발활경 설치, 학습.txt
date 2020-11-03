@@ -1312,8 +1312,8 @@ n%i~n ==0 인것이 자기자신일 경우(1은 초기화값에서 제외)
 11.02)013-------------------------------------------------------------------------------------------------------------
 
 return; 메서드 중단
-break; 반복문 중단, 조건문 중단
-continue; 해당 반복횟수 중단 후 for(증감식)으로 , while(조건식으로감)
+break; 가장 가까운 반복문 중단, 조건문 중단
+continue; 가장 가까운 반복문의 해당횟수 중단 후 for(증감식)으로 , while(조건식으로감)
 
 
 do ~ while
@@ -1397,7 +1397,7 @@ static 메서드 생성
 static 메서드 호출 
 - Test.me1();
 
-static 변수가 있을 대 getters,setters
+static 변수가 있을 때 getters,setters
 ex) public class Sonata{
 	public static String company;
 
@@ -1409,243 +1409,121 @@ ex) public class Sonata{
 		Sonata.company = company;
      }
  
+20.11.03)014------------------------------------------------------------------------------------------
 
+Array[배열]
 
-
-
-
-
-
-
-
-
--------------
-내일 배열
-
-
-[[연습문제]]
-my1 //0.1.2.3.4.5...100
-2 // 2.4.6.8...46
-21// 99.97.96.94..21
-dan2// n단 출력 (StringBuffer 사용)
-3// *을 n개 출력
-31// 3을 호출해서 n번째줄 까지 늘어나는 * 출력
-32// 3을 호출해서 n개 까지 늘어나는 홀수 b(char "@")을 출력
-gugudan2// dan2를 호출, 구구단 출력
-gugudan3// 4x4 구구단 출력
-pibo // 1.1.2.3.5.8.13.21... 
- ->피보나치 수열 출력 n번째 피보나치수p(n) = p(n-1)+p(n-2)
-4//0~9까지 4와 8을 빼고 출력
-40// 소수 검사 하는 메서드
-41// 99~0까지 중 출력, 소수를 만나면 출력 종료
-5//0~9까지 3~6을 빼고 출력
-
-return;
-break;
-continue; 사용
-
-
-구구단2 한번더
-
-	public void me7(int num) {
-		for(int i=0;i<10;i++){
-			if(num%3==0) {
-				System.out.println("3의 배수가 검출, 가장 가까운 반복문중단.");
-				break;
-			}
-		}
-	}
+배열 생성
+1. 자료형[] 변수명 = new 자료형[배열의 크기];
+2. 자료형[] 배열명 = {값1,값2,값3....};
+3. type[ ] arr = new type[] {val1, val2, val3....};
+ ex) 
+	Dog[] d = new Dog[3];
+	Dog[] d2= {new Dog(), new Dog(), new Dog()};
+	Dog[] d3= new Dog[] {new Dog(), new Dog(), new Dog()};
+ ex2)
+	Dog a = new Dog();
+	Dog b = new Dog();
+	Dog c = new Dog();
+	Dog[] d2 = { a, b, c};
+	Dog[] d3 = new Dog[] { a, b, c};
 	
-	public void me71() {
-		for(int i=10;i>=0;i--) {
-			System.out.println("외부for문 시작");
-			
-			for(int j =100; j<105;j++) {
-				if(i%2==0) {
-					break;
-				}
-				System.out.println(i+":"+j);
-			}
-			System.out.println("외부for문 종료");
-		}
-		System.out.println("111");
-	}
-	public void me8() {
-		for(int i=0;i<10;i++) {
-			if(i%5==0){
-				continue;
-			}
-			System.out.println(i);
-		}
-	}
-
-
-
-
-
-
-
-package com.naver;
-
-public class Test2 {
-	public Test2() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	/*
-	 * my1 //0.1.2.3.4.5...10
-	2 // 2.4.6.8...46
-	21// 39.97.96.94..21
-	dan2// n단 
-	3// *을 n개 출력
-	31// 3을 호출해서 n번째줄 까지 늘어나는 * 출력
-	32// 3을 호출해서 n벌째 줄까지 늘어나는 홀수 b(char "@")을 출력
-	gugudan2// dan2를 호출, 구구단 출력
-	pibo // 1.1.2.3.5.8.13.21... 
-	 ->피보나치 수열 출력 n번째 피보나치수p(n) = p(n-1)+p(n-2)
-	 */
-	
-	public void my1() {
-		int i=0;
-		while(i<10) {
-			System.out.println(i);
-			i++;
-		}
-	}
-	public void my2() {
-		int i =0;
-		while(i<47) {
-			System.out.println(i);
-			i+=2;
-		}
-	}
-	public void my21() {
-		int i=39;
-		while(i>=21) {
-			System.out.println(i);
-			i--;
-		}
-	
-	}
-	public void dan2(int dan) {
-		int i=1;
-		while(i<10) {
-			StringBuffer sd = new StringBuffer();
-			sd.append(dan);
-			sd.append("x");
-			sd.append(i);
-			sd.append("= ");
-			sd.append(dan*i);
-			String dan2 = sd.toString();
-			System.out.println(dan2);
-			
-			i++;
-		}
-	}
-	public void my3(int num, String a) {
-		int i =0;
-		while(i<num) {
-			System.out.print(a);
-			i++;
-		}
-		System.out.println();
-	}
-	public void my31(int num) {
-		int i = 0;
-		while(i<num) {
-			my3(i+1,"@");
-			i++;
-		}
-		System.out.println();
-	}
-	
-	public void my32(int num) {
-		int i=0;
-		while(i<num) {
-			if(i%2!=0) {
-			
-			}else {
-				my3(i+1,"#");
-			}
-			i++;
-		}
-	}
-	public void gugudan2() {
-		int i=2;
-		while(i<10) {
-			System.out.println(i+"단" );
-			dan2(i);
-			i++;
-		}
-	}
-	public void pibo() {
-		int a=1;
-		int b=1;
-		int i=0;
-		while(i<15) {
-			int c= a+b;
-			if(i==15-1) {
-				System.out.println(c);
-			}
-			a = b;
-			b = c;
-			
-			i++;
-			
-		//	a b c 
-		//	- a b c
-		//	- - a b c 
-		}
-	}
-	
-	public void my4() {
-		int i=0;
-		while(i<10) {
-			if(i%4==0 || i==0) {
-				i++;
-				continue;
-			}
-			System.out.println(i);
-			i++;
-		}
-	}
-	public int soSSu(int i) {
-		int result=0;
+배열의 크기를 확인하는 속성
+ - 배열명.length;
+ex)
+		int[] arrInt = new int[4];	//[ ] 1차원 배열 , [ ][ ] 2차원 배열, [ ] [ ] [ ] 3차원 배열 ...
+		System.out.println(arrInt.length);
+// length는 배열의 속성으로 반복문을 돌릴 때, 직접적인 배열의 크기 대신 사용
+// arrInt.length로 길이를 구한다(반복문 횟수)
+		int size = dogs.length;
+		System.out.println(size); == System.out.println(dogs.length);
+참조변수....
+// Test class의 me12()에서 파라미터로 넘어온 배열 데이터의 크기 출력
+		System.out.println(dogs.length);
+ex1)
+		 t1.me12(new Dog[5]);
+ex2)
+		Dog[] arrDog = new Dog[3];
+		t1.me12(arrDog);
+//자료형이 Dog인 1차원 배열 arrDog를 생성(두번째 방법)
+// 배열의 크기는 2, 배열의 크기 출력
+ex1)
+		public void me21() {
+		Dog[] arrDog = {new Dog(), new Dog() };
+ex2)
+		Dog a = new Dog();
+		Dog b = new Dog();
+		Dog[] arrDog2 = {a,b};
 		
-		return result;
-	}
-	public void my41() {
-		int i=99;
-		while(i>=0) {
-			
+		System.out.println(arrDog.length);
 		}
+
+ 배열의 각 요소값에 접근하는 방법
+배열명[요소의 인덱스값] = 자료형에 맞는 자료;
+
+index는 0~ length-1까지 (length개)
+가장 큰 index = 배열명.length-1
+	 //dogs의 가장 큰 인덱스 요소값을 null로 설정
+	dogs[dogs.length-1]= null;
+
+//index 요소 값의 출력
+	//다차원 배열일 때
+		int [][] arr2Int = {		// [][]2차원배열
+			{1, 3, 5, 7},
+			{0, 2, 3, 6}
+		};
+		int[] arr0 = arr2Int[0];	// type[] arr = [] / 하나를 풀면 []는 =의 우측으로
+		int arr01= arr0[1]; 		// arr0[1] == arr2Int[0][1]
+
+		int arr0arr1 = arr2Int[0][1];	// type a = arr[][] / 여러개를 한번에 풀 수 있다
+					// arr01 == arr0arr1
+				
+배열을 사용하는 이유
+1. 반복문 사용을 위해
+2. 여러개의 데이터를 반환하기 위해
+
+◇ 배열 크기 확인하는 속성
+arr.length
+
+◇ 배열의 각 요소값에 접근하는 방법
+type[] arr = new type[length];		//[ ] 안에 크기(정수)를 지정.
+type[] arr = {val1, val2, val3, val4...};
+type[] arr = new type[] {val1, val2, val3, val4...};
+
+ex) arr[0] --1차원 배열의 0번 인덱스 값, 1번째 값
+   arr[0][1] -- 2차원 배열 0번 인덱스의 1차원 배열의 1번 인덱스값
+			int [][] arr2Int = {
+					{1, 3, 5, 7},  --> arr2Int[0] -> int[ ] arr0 = {1, 3, 5, 7};
+					{0, 2, 3, 6}  --> arr2Int[1] -> int[ ] arr1 = {0, 2, 3, 6};
+					};
+				int[ ] arr0 = arr2Int[0];
+				int arr01= arr0[1];
+				int arr0arr1 = arr2Int[0][1];
+				//arr01 == arr0arr1
+◇ 배열의 각 요소값 변경
+arr[index]= typeValru;
+ex)	Dog[] dogs = new dogs[] { a, b, c...;};
+	 dogs[index].setName = typeValru;
+	
+◇ 배열의 모든 요속값에 접근하는 방법
+ex)	Dog[] dogs = new dog[] { a, b, c...;};
+	for(int i=0; i < length; i++){
+		arr[ i ]; // dogs[ i ];  
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
-}
+◇ 참조자료형의 배열의 경우, 요소값의 특정 자원을 호출하는 방법
+ex)	Dog[] dogs = new dog[] { a, b, c...;};
+	dogs[index].getName;
+
+◇ 첫 번째 방법으로 배열 생성 후 반복문을 이용하여 요소값을 변경하는 방법
+
+◇ 다차원 배열...
+n차원 배열 안에는 n-1차원의 배열이 들어있다.
+ex) int[][] arr = {
+	{1,2,3,4},
+	{2,3,4,5},
+	{6,7,8,9}
+};
 
 
 
@@ -1655,9 +1533,77 @@ public class Test2 {
 
 
 
+	
+[연습문제]
+me12();
+-3가지 방법으로 인트형 배열[3] 선언, 
+ 선언한 배열의 크기출력, 가장큰 인덱스 99로 변경, 
+	
+- 3가지 방법으로 Car 배열 3 만들기
+각 배열 크기 int로 받아 출력 
+배열의 크기 리턴
 
+-메인에서 카 배열 리턴 받아서 넘기기
 
+- 카 배열 파라미터로 넘어온 배열 데이터 크기 출력
 
+public void me13() {
+		//data.split("#")의 반환값을 arrData로 받고
+		//arrData의 크기를 출력
+		String data ="reacheryo#1#seoul#226#-1";
+		String[] arrData= data.split("#");
+		//#을 기준으로 1차형 배열로 나눠짐
+		System.out.println(arrData.length);
+		arrData[arrData.length-1]="100";
+		arrData[0]="ezen";
+	}
+- car 의 이름 부여
+- car 의 첫번째 요소값을 null로
+- car배열에 있는 모든 객체 출력, 모든 요소의 이름 출력
+- 피보나치 해보기
+
+// arrInt[] 각 인덱스에 정수 대입.
+// arrInt에 0,1,2,3을 입력
+// arrInt에 0,2,4,6을 입력
+// arrInt에 1,3,5,7을 입력
+// arrInt가 갖고 있는 모든 요소값을 for를 이용해 출력
+//배열의 크기가 100인 StringBuffer형의 1차월 배열 arrSb를 생성
+// arrSb의 배열 크기 출력
+// arrSb의 51번째(index 50) 요소값 출력
+// arrSb의 인덱스가 1번인 곳에 sb1객체를 대입
+// arrSb가 가지고 있는 모든 요소값을 출력
+// 단, 출력 순서는 인덱스가 큰 값부터 출력
+// Test class의 me12()에서 파라미터로 넘어온 배열 데이터의 크기 출력
+// dogs의 가장 큰 인덱스 요소값을 null로 설정
+//dogs 배열에 있는 모든 dog객체(모든요소)를 출력
+// dogs 배열에 있는 모든 dog객체(모든요소)의 이름를 출력
+// data.split("#")의 반환값을 arrData로 받고
+// arrData의 크기를 출력
+// #을 기준으로 1차형 배열로 나눠짐
+// arrData의 모든 요소값 출력
+// arrData의 모든 요소값 첫글자 출력 charAt(index)사용
+// 배열 생성2, 크기를 출력
+// 2. 자료형[] 배열명 = {값1,값2,값3....};
+// 인덱스가 1인 요소값 수정
+// arrInt가 가지고 있는 요든 요소값 출력
+// arrInt가 가지고 있는 모든 요소값 출력.
+// 단, 인덱스1인 요소값 출력금지
+// arrInt가 가지고 있는 모든 요소값 출력.
+// 단, 요소값이 6이면 출력금지
+// 자료형이 Dog인 1차원 배열 arrDog를 생성(두번째 방법)
+// 배열의 크기는 2, 배열의 크기 출력
+// arrdog의 가장 큰 인덱스의 요소값을 null로 수정
+// arrDog의 인덱스가 1인 요소값의 name을 출력.
+// 단, 해당 요소값이 null이 아닌 경우에만
+// arrStr의 크기(length)를 출력
+// 메인에서 호출
+// arrStr index가 1인 곳의 값을 "12"로 변경
+// arrStr의 index가 1인 곳의 값을 출력
+// 다차원 배열일 때
+// 3번째 배열 생성 방법
+// 3번째 방법으로 arrFloat 생성
+// 값 = 3.14, 4.2, 9.8
+// dogs의 크기를 int형 변수명에 대입하고 출력
 
 
 
@@ -1688,10 +1634,13 @@ https://edu.goorm.io/search?subject=java%20%EC%83%9D%ED%99%9C%EC%BD%94%EB%94%A9&
 실습코딩 인터넷강좌
 
 === 에러 메세지
-
-java.lang.NullPointerException 객체가 만들어 지지 않았는데 자원에 접근하려 할 때 에러
+ArrayIndexOutOfBoundsException
+선언한 index의 값을 벗어남 (MAX_index= length-1과 같음)
+NullPointerException 
+객체가 만들어 지지 않았는데 자원에 접근하려 할 때 에러
 *자원 = 변수, 상수, 메서드
-ArithmeticException. : / by zero . 수치를 0으로 나눴을 때 에러
+ArithmeticException
+수치를 0으로 나눴을 때 에러
 
 === 스위치 연산
 두 값을 실행 할 때 마다 번갈아 가며 값이 나온다.
