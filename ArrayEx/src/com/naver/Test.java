@@ -322,8 +322,27 @@ public class Test {
 
 	public void pibo() {
 		
+		int[] pibo = new int[20];
+		int a=1;
+		int b=1;
+		pibo[0]=a;
+		pibo[1]=b;
+		for(int i=2;i<pibo.length;i++) {
+			int c= a+b;
+			a=b;
+			b=c;
+			pibo[i]=c;
+			
+		}
+		for(int i=0;i<pibo.length;i++) {
+			System.out.println(pibo[i]);
+		}
+		
 
 	}
 	//////////////////////////////////////
 
 }
+
+
+

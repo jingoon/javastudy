@@ -1524,6 +1524,100 @@ ex) int[][] arr = {
 	{2,3,4,5},
 	{6,7,8,9}
 };
+20.11.4)015----------------------------------------------------------------------------------
+ test
+		for(int i=0; i<arr.length;i++) {
+			System.out.println(arr[i]);
+
+[I@36aa7bc2
+[I@76ccd017
+[I@182decdb
+[I@26f0a63f
+[I@4361bd48
+===================> [ I @ 숫자 로 시작한다. 배열의 요소 초기값(주소)
+
+
+◇다차원 배열
+
+ 2차원 배열 (불가변일 때)
+2차원 배열 안에는 1차원 배열이 들어 있다.
+***(n차원 배열안에는 n-1차원 배열이 들어 있다)
+ex)
+	Dog[][] arr = new Dog[10][2];
+
+arr은 2차 배열이고, 1차배열을 10개 가지고 있다	[10개 = (00) (00) (00) (00) (00) (00) (00) (00) (00) (00) ]
+(arr.length ==10)
+
+arr[i]는 1차 배열이고, 배열의 크기는 2이다.	[2개 = 0 0]
+(arr[i].length ==2)
+i= 2차 배열의 크기만큼, 1차 배열의 갯수만큼 (0=i<arr.length)
+
+arr[i][j]는 arr[i]의 요소값(arr의 최종 요소값)이다.	값 = 0
+j=1차 배열의 크기만큼(0=i<arr[i].length)
+
+int[][] arr = new int[3][];	//다차원 배열에서 n-1차원 배열의 크기를 지정해 줘야 한다. (3이 없으면 에러)
+
+◇가변형 배열
+가변형 n-1차원 배열 요솟값의 입력은 변수.length의 값이 없으면 안된다.
+
+=== String class
+
+◇ String()
+
+//명시적 객체생성
+(힙메모리영역에 생성)
+		String msg = new String("hello");
+//암시적 객체 생성법(리터럴)
+(메소드 메모리 영역에 생성)
+		String msg2="hello";
+
+ex)  메소드 메모리의 값은 최대한 공유하려 한다.
+ 		String msg1 = new String("a");
+		String msg2 = new String("a");
+		String msg3 = "a";
+		String msg4 = "a";
+		
+		System.out.println(msg1==msg2); //false
+		System.out.println(msg1==msg3); //false
+		System.out.println(msg3==msg4); //true
+
+ex) 데이터 값만 비교 equals
+		System.out.println(msg1.equals(msg2)); // true
+		System.out.println(msg1.equals(msg3)); //true
+
+◇ to String()
+- String형으로 변경 해준다
+
+◇ StringBuffer()
+String클래스는 불변적 성격을 갖고있어서 
+변수에 새로운 값을 대입해도 이전의 값이 바로 삭제되지 않고 메모리에 남아있는다.
+(시간이 지나면 가비지컬렉터가 삭제)
+문자열이 계속 누적되는 경우 메모리 부족, 속도저하의 문제를 발생시킬 수 있다.
+이럴 때 StringBuffer()를 사용한다.
+
+ex)
+- String msg = "hello";
+		msg = "good";		
+		msg ="";
+		msg +="안녕하세요";
+		msg +="저는 홍길동입니다";
+		msg +="저는 어디 살고있어요";
+		msg +=... 누적....
+		
+- StringBuffer sb = new StringBuffer();	
+		sb.append(" 안녕하세요");
+		sb.append(" 저는 홍길동입니다");
+		sb.append(" 저는 어디 살고있어요");
+		msg = sb.toString(); 		// sb를 String형으로 변경해 준다.
+ syso(msg)--> " 안녕하세요 저는 홍길동입니다 저는 어디 살고있어요";	
+
+◇중요◇ equals()
+ 참조자료형의 비교연산
+ 동등성을 비교 (객체의 구성요소 중 하나를 비교)
+(기본자료형의 비교연산은 ==을 사용)
+
+ 동일성 비교: (데이터와 저장위치) Vs 동등성 비교: (데이터만 비교)
+(기본료형)== Vs (참조자료형) equals( )
 
 
 
@@ -1533,99 +1627,38 @@ ex) int[][] arr = {
 
 
 
+
+
+
+
+[[연습문제]]
+	// String 변수로 이름을 선언하고 #으로 구분한다
+	// String 배열에 split("#")으로 나눈 문자열 선언과 대입.
+	// Dog 배열을 선언(String배열의 크기(길이)만큼 생성), 
+	// Dog 배열의 각 요소의 name(dog 멤버변수)에 String배열의 각 요소를 대입
+	// (Dog 배열을 반환하여 각 요소출력 메서드)각 요소의 name을 출력
+
+	// 최종 값은 5 ~9 다음 0~9 0~9 순환되면서 배열에 들어감
+	// int형 3차원 arr3은 3X1X4크기
+
+	// arr3의 마지막 index의 요솟값의 1번째 요솟값 출력
+		
+	// 최종 값은 5 ~9 다음 0~9 0~9 순환되면서 배열에 들어감
+	// int형 2차원 배열 arr4는 5x3크기
 	
-[연습문제]
-me12();
--3가지 방법으로 인트형 배열[3] 선언, 
- 선언한 배열의 크기출력, 가장큰 인덱스 99로 변경, 
-	
-- 3가지 방법으로 Car 배열 3 만들기
-각 배열 크기 int로 받아 출력 
-배열의 크기 리턴
+	// arr4의 [2][1]의 요솟값을 100으로 수정 (가로~~세로~)
 
--메인에서 카 배열 리턴 받아서 넘기기
+	// arr4의 3번째 요소값의 최종 요솟값을 구하라.
 
-- 카 배열 파라미터로 넘어온 배열 데이터 크기 출력
+	// StringBuffer 사용 
+	// "태산이 높다하되 하늘아래 뫼이거늘 오르고 또 오르면 못 오를릴 없건마는 
+	// 사람이 제 아니 오르고 뫼만 높다 하더라
 
-public void me13() {
-		//data.split("#")의 반환값을 arrData로 받고
-		//arrData의 크기를 출력
-		String data ="reacheryo#1#seoul#226#-1";
-		String[] arrData= data.split("#");
-		//#을 기준으로 1차형 배열로 나눠짐
-		System.out.println(arrData.length);
-		arrData[arrData.length-1]="100";
-		arrData[0]="ezen";
-	}
-- car 의 이름 부여
-- car 의 첫번째 요소값을 null로
-- car배열에 있는 모든 객체 출력, 모든 요소의 이름 출력
-- 피보나치 해보기
+	// equals로 참조자료형 비교
+	// String형 a1, a2 "a" 선언 
+	//참조자료형 String a3,a4 선언 eqauls로 비교 
 
-// arrInt[] 각 인덱스에 정수 대입.
-// arrInt에 0,1,2,3을 입력
-// arrInt에 0,2,4,6을 입력
-// arrInt에 1,3,5,7을 입력
-// arrInt가 갖고 있는 모든 요소값을 for를 이용해 출력
-//배열의 크기가 100인 StringBuffer형의 1차월 배열 arrSb를 생성
-// arrSb의 배열 크기 출력
-// arrSb의 51번째(index 50) 요소값 출력
-// arrSb의 인덱스가 1번인 곳에 sb1객체를 대입
-// arrSb가 가지고 있는 모든 요소값을 출력
-// 단, 출력 순서는 인덱스가 큰 값부터 출력
-// Test class의 me12()에서 파라미터로 넘어온 배열 데이터의 크기 출력
-// dogs의 가장 큰 인덱스 요소값을 null로 설정
-//dogs 배열에 있는 모든 dog객체(모든요소)를 출력
-// dogs 배열에 있는 모든 dog객체(모든요소)의 이름를 출력
-// data.split("#")의 반환값을 arrData로 받고
-// arrData의 크기를 출력
-// #을 기준으로 1차형 배열로 나눠짐
-// arrData의 모든 요소값 출력
-// arrData의 모든 요소값 첫글자 출력 charAt(index)사용
-// 배열 생성2, 크기를 출력
-// 2. 자료형[] 배열명 = {값1,값2,값3....};
-// 인덱스가 1인 요소값 수정
-// arrInt가 가지고 있는 요든 요소값 출력
-// arrInt가 가지고 있는 모든 요소값 출력.
-// 단, 인덱스1인 요소값 출력금지
-// arrInt가 가지고 있는 모든 요소값 출력.
-// 단, 요소값이 6이면 출력금지
-// 자료형이 Dog인 1차원 배열 arrDog를 생성(두번째 방법)
-// 배열의 크기는 2, 배열의 크기 출력
-// arrdog의 가장 큰 인덱스의 요소값을 null로 수정
-// arrDog의 인덱스가 1인 요소값의 name을 출력.
-// 단, 해당 요소값이 null이 아닌 경우에만
-// arrStr의 크기(length)를 출력
-// 메인에서 호출
-// arrStr index가 1인 곳의 값을 "12"로 변경
-// arrStr의 index가 1인 곳의 값을 출력
-// 다차원 배열일 때
-// 3번째 배열 생성 방법
-// 3번째 방법으로 arrFloat 생성
-// 값 = 3.14, 4.2, 9.8
-// dogs의 크기를 int형 변수명에 대입하고 출력
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+https://blog.naver.com/writer0713/220905475373
 
 
 정보처리기사 실기 알고리즘
