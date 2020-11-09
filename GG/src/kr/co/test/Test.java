@@ -2,8 +2,40 @@ package kr.co.test;
 
 import java.util.Scanner;
 
+import net.daum.child;
+
 public class Test {
+	
+	private final int A_B_C = 3;
+	private static final int C_D_E=44;
+	private final int D_E_F;
+	
+	public Test() {
+		//A_B_C = 55;
+		D_E_F = 55;
+	}
+	public Test(int D_E_F) {
+		//this.A_B_C = A_B_C;
+		this.D_E_F = D_E_F;
+	}
+	
 	public static void main(String[] args) {
+		
+		Grand g = new child();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		Test t1 = new Test();
+		//변수: 값이 바뀌는 데이터
+		//t1.A_B_C=55;	상수는 변경 할 수 없음
+		System.out.println(t1.A_B_C);
+		System.out.println(Test.C_D_E);		// static은 클래스명. 호출
 		
 		Scanner sc = new Scanner(System.in); //키보드 입력
 		
