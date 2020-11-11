@@ -1,0 +1,27 @@
+package com.naver;
+
+public class Test01 {
+	public Test01() {
+		new Inter1() {
+			
+			@Override
+			public void me1() {
+				System.out.println("생성자로 의심스러워");
+			}
+		}.me1();
+	}
+	
+	public Inter1 ano = new Inter1() {
+		
+		@Override
+		public void me1() {
+			System.out.println("호출 가능 익명?");
+			
+		}
+	};
+	
+	public void me2() {
+		System.out.println("일반 메서드");
+	}
+}
+

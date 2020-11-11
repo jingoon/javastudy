@@ -1,0 +1,15 @@
+package com.naver;
+
+public class Hero {
+	Weapon[] weapons;
+	Weapon w;
+	public Hero() {
+		// TODO Auto-generated constructor stub
+	}
+	public Hero(Weapon[] weapons, Weapon w) {
+		super();
+		this.weapons = weapons;
+		this.w = w;
+	}
+	
+}

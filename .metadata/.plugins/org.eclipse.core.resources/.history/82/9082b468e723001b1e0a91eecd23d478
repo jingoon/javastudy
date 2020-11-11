@@ -1,0 +1,5 @@
+package study.my;
+
+public interface Inter1 {
+
+}

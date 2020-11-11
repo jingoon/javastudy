@@ -13,4 +13,10 @@ public class DeleteCommand implements Command{
 		DB.db.remove(dto);
 	}
 
+	@Override
+	public String toString() {
+		return "회원삭제";
+	}
+	
+
 }

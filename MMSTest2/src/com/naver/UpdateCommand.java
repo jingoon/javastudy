@@ -2,7 +2,7 @@ package com.naver;
 
 import java.util.Scanner;
 
-public class UpdateCommand implements Command{
+public class UpdateCommand implements Command {
 
 	@Override
 	public void execute(Scanner sc) {
@@ -13,10 +13,15 @@ public class UpdateCommand implements Command{
 		System.out.println("새로운 나이를 입력하세요");
 		int age = sc.nextInt();
 		sc.nextLine();
-		
+
 		MemberDTO dto = new MemberDTO(id, name, age);
-		int index=DB.db.indexOf(dto);
+		int index = DB.db.indexOf(dto);
 		DB.db.set(index, dto);
+	}
+
+	@Override
+	public String toString() {
+		return "회원수정";
 	}
 
 }

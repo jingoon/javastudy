@@ -1051,6 +1051,11 @@ ex) 		 i << n == i*(2^n)
  비트연산자4 & | ^ ~
  시프트연산자2 >> << 
 
+스위치 연산
+두 값을 실행 할 때 마다 번갈아 가며 값이 나온다.
+초기값이 0 or  1, true or false 이어야 한다
+(boolean a)	a = !a;
+(int a)		a = 1-a;	
 10.29)011-------------------------------------------------------------------------------------
 
  조건문
@@ -2194,7 +2199,7 @@ class A implements I{ // 클래스A는 인터페이스 I를 구현한다. (상�
 - delete 삭제
 
 구조적 인터페이스
-public final static && public abstact
+public final static && public abstact void
 퍼블릭 스태틱 상수&&퍼블릭 추상메서드로 구성된 자료 구조
 
 인터페이스 내에서는
@@ -2212,10 +2217,15 @@ ex)
 	/* public abstract */ void me2();
 	/* public */ abstract void me3();
 		public abstract void me1();
-
 	}
 
 인터페이스는 다중상속 가능
+1. 인터페이스가 여러개의 인터페이스를 상속
+public interface inter1 extends Inter2, Inter3{}
+2. 클래스가 여러개의 인터페이스를 구현
+public class Child imlpements Inter3, Inter2{}
+- public class Show extends Object implements Inter2, Inter3{} //오브젝트는 최상위 부모클래스(이미상속)
+
 
 클래스가 클래스를 상속한다 extends
 인터페이스가 인터페이스를 상속 extends
@@ -2235,13 +2245,13 @@ interface 구성요소 : public static 상수, public abstract void
 
 상속과 인터페이스 둘다 적용가능
 
-인터페이스는 객체 생성없이 호출함.
+//인터페이스는 객체 생성없이 호출함.???
 
 DTO(Data Tranfer Object)클래스 : 데이터 저장 전용 클래스
 데이터를 저장할 목적으로 만들어진 클래스
 =TO=VO(Value Ovject)=domain
 1. Serializable 인터페이스 구현(class 클래스명 implements Serializable)
-1.1 Add default serial vision ID (클래스명 마우스오버)
+1.1 Add default serial version ID (클래스명 마우스오버)
 2. 변수 선언 시 사용되는 접근제한자는 무조건 private
 3. 디폴트 생성자 생성(Java bean)
 4. 사용자 생성자 생성
@@ -2250,6 +2260,233 @@ DTO(Data Tranfer Object)클래스 : 데이터 저장 전용 클래스
 7. hashCode()/equals() 오버라이딩
 
 
+20.11.11)020-----------------------------------------------------------------------------
+
+내부 클래스
+
+내부클래스 선언과 호출
+Test2.MemberClass mc2 = new Test2().new MemberClass(); //외부클래스객체.내부클래스객체
+mc2.mc1						//내부클래스메서드 호출
+===
+public class Test2 {
+	public class MemberClass{		// 멤버 내부 클래스
+		private int age;
+		public void mc1() {		//내부클래스의 메서드
+			System.out.println("mc1"); 
+		}
+	}
+}
+
+static 내부 클래스
+Test3.StaticInnerClass sic1 = new Test3.StaticInnerClass();  
+// new는 StaticInnerClass()의 새로운 객체(클래스는 객체가 필요함static이지만)
+// Static 상수는 클래스명.상수명 으로 객체없이 접근함
+sic1.sic();
+===
+public class Test3 {
+	private String msg;
+	public static class StaticInnerClass{
+		private int age;
+		public void sic() {
+			System.out.println("sic");
+		//	System.out.println(msg);  	static클래스의 변수는 바로접근 안됨
+		//	me1();			static클래스의 메서드도 바로호출 안됨
+			Test3 t3 = new Test3();	// 선언후 접근가능
+			System.out.println(t3.msg);	
+			t3.me1();						
+		}
+	}
+}
+
+로컬 내부클래스
+public class Test4 {
+	public void me1() {			// me1을 호출 해야 lic()에 접근가능
+		int a =10;
+		class LocalInnerClass{ 			// 접근제한자 쓸수 없다. 
+			public void lic() {			//보안에 강력하다..(클래스 메서드 안에 로컬클래스 안에 메서드)
+				System.out.println(a);	//클래스외부 호출 불가
+			}
+		}
+		LocalInnerClass lic1 = new LocalInnerClass();
+		lic1.lic();				// 여기서 실행. 클래스외부 호출 불가
+	}
+}
+
+익명의 내부클래스***** 다시보기.
+클래스는 구조적으로 "class"키워드가 있어야 클래스이다
+익명의 내부클래스는 class키워드가 없기 때문에 "익명"의 내부클래스라고 한다.
+((( 클래스의 선언과 객체의 생성을 동시에 하기 때문에 단 한번만 사용될 수 있고 오직 하나의 객체만을 생성할 수 있는
+일회용클래스이다. 이름이 없기 때문에 생성자도 가질 수 없으먀 , 부모클래스의 이름이나 구현하고자 하는 인터페이스의
+이름을 사용해서 정의하기 때문에 하나의 클래스로 상속받는 동시에 인터페이스를 구현하거나 둘이상의 인터페이스를 
+구현할 수 없다. 
+((( 오로지 단 하나의 클래스를 상속 받거나 단하나의 인터페이스만을 구현할 수 있다.)))
+
+1. 변수를 선언하면서 사용 	=가짜 익명(변수있음)
+// public 외부클래스명() { new 인터페이스명(){구현부}};	
+public class Test5 {
+	private int a;
+	
+	public Inter1 ano = new Inter1() {
+		
+		@Override
+		public void me1() {
+			// TODO Auto-generated method stub
+			
+		}
+	};
+
+}
+===
+Test5 t1 = new Test5();
+t1.ano.me1();
+
+2. 변수 선언없이 사용	=진짜 익명(변수없음)
+// public 외부클래스명() { new 인터페이스명(){구현부}};	
+// 생성자 안에 new 인터페이스(){구현부}; 와 모양이 같음
+public class Test6 {				
+	public Test6() {			//외부 호출 불가
+		new Inter1() {
+			@Override
+			public void me1() {
+			}
+		}.me1();			// 여기서 바로 사용
+	}
+
+}
+ex)
+	public class Test01 {
+	//익명의 내부 클래스1
+	// public 외부클래스명() { new 인터페이스명(){구현부}};	
+	public Inter1 ano = new Inter1() {
+		@Override
+		public void me1() {
+			System.out.println("가짜 익명");
+		}
+	};
+	//익명의 내부 클래스2
+	// public 외부클래스명() { new 인터페이스명(){구현부}};	
+	// 생성자 안에 new 인터페이스(){구현부}; 와 모양이 같음
+	// 디폴트 생성자와 동시 사용불가(생성자 만들고 new 인터페이스명 -> 익명의 내부클래스)
+	// 이름이 없어서 따로 호출 불가 } 뒤에 .오버라이드 메서드이름 으로 호출.
+	// Test01 객체생성후 첫 메서드 호출시에만 같이 나옴
+	public	Test01() {	// 외부 클래스명() 괄호가 있다.
+		new Inter1() {	// new 구현 인터페이스명()
+			@Override
+			public void me1() {
+				System.out.println("진짜 익명"); 
+			}
+		}.me1();;		// 여기서 바로 사용 ;or;; 둘다 됨
+	}
+	public void me2() {
+		System.out.println("진짜익명 호출용");
+	}
+}
+main)						Console)
+		Test01 t01 = new Test01();		
+		t01.me2();			// 진짜 익명 
+						// 진짜익명 호출용
+		t01.ano.me1();			// 가짜 익명
+		t01.me2();			// 진짜익명 호출용
+
+
+예외 Exception
+클래스로 예외처리함
+
+예외처리 방법
+1. try ~ catch
+: 예외가 발생해도 예외가 없는 것과 같은 효과
+: 예외 발생 코드를 블럭잡고 Alt +Shift +z ->try/catch block
+- try 예외가 발생할 수 있는 코드
+- catch 예외가 발생할 때 실행할 코드
+- 예외가 생기지 않으면 정상실행함
+
+try~catch
+문법적으로 이상이 없지만, 논리적으로 이상이 있을경우 사용
+개발자의 잘못을 처리하기 위해 사용해서는 안됨.
+사용자로부터 잘못된 데이터를 입력했을 때를 대비함
+ex)		
+		try {
+			String msg = (String) t2;			// 예외 발생 예상 코드
+		} catch (Exception e) {
+			System.out.println("뭔가 문제있지만 무시하겠음me3");	// 예외 발생시 실행
+			return;	//예외발생시 빠져나감
+		}
+
+1-1. try ~ catch ~finally~
+finally 
+ㅇ
+-retrun; 을 만나도 반드시 실행한다.
+ex)
+		try {
+			String msg = (String) t2;			// 예외 발생 예상 코드
+		} catch (Exception e) {
+			System.out.println("뭔가 문제있지만 무시하겠음me3");	// 예외 발생시 실행
+			return;	//예외발생시 빠져나감
+		}finally{
+			System.out.println("성공/실패 상관없이 실행");	//예외발생,return;있음,예외없음/ 상관없이 실행
+			System.out.println("리턴보다 강력함");
+		}
+
+
+2. throws
+: 예외가 발생했을 때, 해당 메서드를 호출한 곳에서 예외처리를 하도록 예외를 던짐.(받은자가 선택지 생김)
+2-1)
+		public void me5(int idx) throws Exception{ 	//<----메서드 중괄호 앞에 throws Exception명시
+			String msg="hi";
+			System.out.println(msg.charAt(idx));
+		}
+호출하는 메서드에 빨간줄(선택지) 생김
+ 	
+2-2) 
+		public void me7(String msg) throws Exception { 
+		if (msg.equals("개새끼")) {
+			throw new Exception("욕설금지");
+		}
+// 호출하는 메서드에  throw를 던짐(try ~catch작업 가능)
+
+2-3) 사용자정의 throws
+		public void me72(String msg) throws Exception {
+		if (msg.equals("개새끼")) {
+			throw new DoNotSwearException1("욕설금지!!");
+		}
+		System.out.println(msg);
+		}
+// 예외를 무시하고 계속 실행
+// throws를 날림. try~ catch 선택지
+
+
+
+3. thow
+: 문법적으로 예외는 아니지만 논리적인 예외를 발생. 예외메시지와 함께 멈춤
+3-1) 없나?
+3-2)
+		public void me7(String msg) {
+		if (msg.equals("개새끼")) {
+			throw new RuntimeException("욕설금지");
+		}
+// 멈춤
+// Exception in thread "main" java.lang.RuntimeException: 욕설금지
+
+3-3) 사용자 정의 throw
+		public void me71(String msg) {
+		if (msg.equals("개새끼")) {
+			throw new DoNotSwearException2("욕설 금지!");
+		}
+		System.out.println(msg);
+		}
+// 멈춤
+// Exception in thread "main" com.naver.DoNotSwearException2: 욕설 금지
+
+
+
+4. 사용자 정의 예외 클래스(throw, throws)
+가능하면 Exception을 상속하도록 하여, throw를 날리도록 구현-> 호출하는 메서드에서 try~catch작업 가능
+class -> constructor from superclass
+
+extends Exception(예외를 던짐 throws Exception) 무시하고 실행	--->throws
+extends RuntimeException 상속함( 멈춤 )			--->throw
+
+2-3, 3-3
 
 
 
@@ -2265,8 +2502,22 @@ DTO(Data Tranfer Object)클래스 : 데이터 저장 전용 클래스
 
 
 
+오늘
 
-내부클래스, 예외처리
+내부클래스,Innerclass, new interface, 예외, Exception, 예외처리방법, try~catch~finally, thows, throw, RuntimeException, 
+
+
+
+
+
+
+
+
+
+
+[[매일 연습문제, 회원관리 memberDTO]]
+GG + MMS // 두개 한번씩 
+GG의 체인지웨폰 if대신 예외처리로 변경
 
 [[연습문제]]
 몬스터 죽으면 무기 드랍. 착용가능 
@@ -2355,6 +2606,8 @@ https://edu.goorm.io/search?subject=java%20%EC%83%9D%ED%99%9C%EC%BD%94%EB%94%A9&
 실습코딩 인터넷강좌
 
 === 에러 메세지
+RuntimeException
+throw
 IllegalFormatConversionException: d != java.lang.String
 %d에 문자열 변수를 넣었을 때
 IllegalFormatConversionException: f != java.lang.Integer
@@ -2373,11 +2626,6 @@ NullPointerException
 ArithmeticException
 수치를 0으로 나눴을 때 에러
 
-=== 스위치 연산
-두 값을 실행 할 때 마다 번갈아 가며 값이 나온다.
-초기값이 0 or  1, true or false 이어야 한다
-(boolean a)	a = !a;
-(int a)		a = 1-a;	
 
 
 

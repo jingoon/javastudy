@@ -1,0 +1,19 @@
+package study.my;
+
+public class Test4{
+	public void me1() {
+		int a=10;
+		class LocalInnerClass{
+			public void lic() {
+				System.out.println("test4.me1.lic·ÎÄÃ");
+			}
+		}
+		LocalInnerClass lic1 = new LocalInnerClass();
+		lic1.lic();
+	}
+	public void me2() {
+		me1();
+		
+	}
+	
+}

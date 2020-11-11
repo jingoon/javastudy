@@ -1,0 +1,52 @@
+package kr.co.test2;
+
+import java.util.Scanner;
+
+import com.naver.Bow;
+import com.naver.Gun;
+import com.naver.Hero;
+import com.naver.Monster;
+import com.naver.Sword;
+import com.naver.Weapon;
+
+public class Test2 {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		Monster mon = new Monster(100);
+		System.out.println(mon.getHp());
+		
+		Weapon[] weapons = new Weapon[]{new Bow("bow", 3),new Sword("sword", 5),new Gun("gun", 10)};
+		//new Weapon[] add
+		Weapon w = weapons[0];
+		Hero batman = new Hero(weapons, w);
+		
+		int menu=0;
+		int weaponIndex=0;
+		boolean isTrue = true;
+		while(isTrue) {
+			System.out.println("메뉴를 선택하세요.");
+			System.out.println("0:공격, 1:무기변경, 2:종료");
+			menu = sc.nextInt();
+			if(menu==2) {
+				break;
+			}else if(menu==0) {
+				batman.attack(mon);
+			}else if(menu==1) {
+				System.out.println("무기를 선택하세요");
+				for(int i=0;i<weapons.length;i++) {
+					System.out.print(String.format("%d:%s, ", i,weapons[i]));
+				}
+				System.out.println();
+				weaponIndex = sc.nextInt();
+				sc.nextLine();
+				batman.chageWeapon(weaponIndex);
+			}
+		}
+		
+		
+		sc.close();
+		System.out.println("end");
+	}
+
+}

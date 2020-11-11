@@ -1,0 +1,15 @@
+package study.my;
+
+public class Test6 {
+	public Test6() {
+		Inter1 aro = new Inter1() {
+			
+			@Override
+			public void inter() {
+				System.out.println("Inter1 aro = new Inter1() {};");
+				
+			}
+		};
+	}
+
+}

@@ -1,0 +1,114 @@
+package study.my;
+
+
+
+public class Test1 {
+	public static int a=0;
+	public void t1() {
+		System.out.println("test1.t1");
+	}
+	
+}
+class sub1{	// 내부 클래스 아님
+	
+}
+class Test2{
+	private String msg;
+	public Test2() {
+		// TODO Auto-generated constructor stub
+	}
+	public class MemberClass{
+		//멤버 내부 클래스
+		private int age;
+		public void mc1() {
+			System.out.println("Test2의 MemberClass의 mc1입니다");
+		}
+		public MemberClass() {
+			// TODO Auto-generated constructor stub
+		}
+		public MemberClass(int age) {
+			super();
+			this.age = age;
+		}
+		public int getAge() {
+			return age;
+		}
+		public void setAge(int age) {
+			this.age = age;
+		}
+		
+	}
+	public void me1() {
+		System.out.println("Test2의 me1입니다");
+	}
+}
+
+class Test3{
+	private String msg;
+	public static class StaticInnerClass{
+		private int age;
+		public void sic() {
+			System.out.println("Test3.StaticInnerClass.sic");
+		}
+		public StaticInnerClass() {
+			// TODO Auto-generated constructor stub
+		}
+		public StaticInnerClass(int age) {
+			super();
+			this.age = age;
+		}
+		public int getAge() {
+			return age;
+		}
+		public void setAge(int age) {
+			this.age = age;
+		}
+		
+	}
+	public void me1() {
+		System.out.println("test2의 me1");
+	}
+	
+}
+
+class Test4{
+	public void me1() {
+		int a=10;
+		class LocalInnerClass{
+			public void lic() {
+				System.out.println("test4.me1.lic로컬");
+			}
+		}
+	}
+}
+
+class MainEx{
+	public static void main(String[] args) {
+		Test1 t1 = new Test1();
+		t1.t1();
+		Test2 t2 = new Test2();
+		t2.me1();
+		Test2.MemberClass tm1 = new Test2().new MemberClass();
+		tm1.mc1();
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
