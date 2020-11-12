@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Delete 22 resources" deleteContents="false" description="Delete 22 resources" element1="/ArrayEx" element10="/MethodTest4" element11="/OperatorEx" element12="/OperatorEx2" element13="/OverloadingEx" element14="/StaticEx" element15="/StringEx" element16="/SwitchCaseEx" element17="/Test" element18="/TestDel" element19="/TypeEx" element2="/ArrayEx2" element20="/VarargsEx" element21="/VariableEx" element22="/whileEx" element3="/ConstructorEx" element4="/ForEx" element5="/HelloWorld" element6="/IfEx" element7="/InstanceEx" element8="/InstanceEx2" element9="/MethodEx" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="22" stamp="1604622585756"/>
-</session>
