@@ -20,22 +20,27 @@ public class MainEx {
 		
 		int idx = -1;
 		
-		while(isOk) {
-			System.out.println("메뉴를 선택하시오.");
-			System.out.println("0: 회원 입력, 1: 회원 조회, 2: 삭제, 3: 종료");
-			idx = sc.nextInt();
-			sc.nextLine();
-			
-			if(idx == coms.length) {
-				break;
+		try {
+			while(isOk) {
+				System.out.println("메뉴를 선택하시오.");
+				System.out.println("0: 회원 입력, 1: 회원 조회, 2: 삭제, 3: 종료");
+				idx = sc.nextInt();
+				sc.nextLine();
+				
+				if(idx == coms.length) {
+					break;
+				}
+				
+				coms[idx].execute(sc);
+				
 			}
-			
-			coms[idx].execute(sc);
-			
-		}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
 		
 		sc.close();
-
+		}
 	}
 
 }

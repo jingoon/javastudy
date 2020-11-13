@@ -18,4 +18,10 @@ public class DeleteCommand implements Command{
 		}
 	}
 
+	@Override
+	public String toString() {
+		return "ªË¡¶";
+	}
+	
+
 }

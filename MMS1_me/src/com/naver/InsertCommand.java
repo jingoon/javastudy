@@ -17,5 +17,9 @@ public class InsertCommand implements Command{
 		MemberDTO dto = new MemberDTO(id, name, age);
 		DB.db.add(dto);
 	}
+	@Override
+	public String toString() {
+		return "µî·Ï";
+	}
 
 }
