@@ -5,6 +5,15 @@ public class Monster {
 	private String name;
 	private int exp;
 	
+	
+	public Monster(int hp, String name, int exp) {
+		super();
+		this.hp = hp;
+		this.name = name;
+		this.exp = exp;
+	}
+
+
 	public Monster() {
 		this.name="∏ÛΩ∫≈Õ";
 	}

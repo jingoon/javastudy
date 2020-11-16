@@ -2491,12 +2491,11 @@ extends RuntimeException 상속함( 멈춤 )			--->throw
 
 2011.12) 021------------------------------------------------------------------------------
  
-	<예외처리에 관한 질문>
 예외
  : 프로그래머가 조치할 수 있는 현상. 
 사용자의 입력값이 논리적&문법적으로 맞지 않는 상황
 에러
- : 프로그래머가 조치할 수 없는 현상. jvm, 단전 
+ : 프로그래머가 조치할 수 없는 현상. jvm, 단전 ...등
 
 Throwable: 예외와 에러의 최상위 부모클래스
 
@@ -2511,11 +2510,15 @@ Exception or RentimeException을 상속함
 
 try ~ catch 
 : 조치방법을 알고 있을 때,요구사항명세서에 조치상항이 적혀있을 때, 조치에 대한 내용을 책임질 수 있을 때
+
 throws 
 : 조치방법을 모를 때, 예외발생 조치를 책임질 수 없을 때
+
 fianlly
 : 예외가 있든 없든 반드시 실행해야 하는 코드, return보다 강력함
 
+===================
+	<예외처리에 관한 질문>
 1. 예외 처리 잘합니까?
 -try ~catch 와 throws를 구분해 사용할 수 있고,
 예외가 발생하든 그렇지 않든 반드시 실행할 코드가 있으면 
@@ -2525,20 +2528,19 @@ finally구문에 작성할 수 있고,
 -강제로 예외를 발생시키는 예시는>
  문법적으로는 맞지만 논리적으로는 맞지 않을 때.
  "개새끼"등.. 욕설은 강제로 예외를 발생시키는 코드
-
 2. 예외 메시지 읽을 줄 아세요?
 (예외가 발생했을 때, 넘겨주는 메시지를 보고 조치할 수 있나?)
 예외 발생 원인과 예외 발생 위치를 알 수 있습니다. 
 조치할 수 있는 내용이면 곧바로 조치하고 모르는 내용이면 
 구글링하여 조치를 취해왔습니다. (구글링으로 안되면 팀장에게 물어본다)
+====================
 
---- 
 
 Calendar = abstract class 
 
 	public void me1() {
 		//1. Calendar  클래스 객체 생성 방법
-		Calendar c = Calendar.getInstance(); // 현재시각정보(추상객체는 객체 생성불가,캘릭더 클래스의 겟인스턴스)
+		Calendar c = Calendar.getInstance(); // 현재시각정보(추상객체는 객체 생성불가,캘릭더 클래스의 getInstance)
 	}
 
 	public void me2() {
@@ -2758,80 +2760,25 @@ Random
 	}
 	
 	public void me2() {
-		Random rnd = new Random(System.currentTimeMillis());
+		Random rnd = new Random(System.currentTimeMillis());	// 1/1000초 단위로 변하는 시드를 바꿀 수 있다.
+								// 정해진 배열이지만 시드가 바뀌면 배열이 바뀐다.
 	}
 	
 	public void me1() {
 		Random rnd = new Random();
 	}
 ----
-package Calendar;
 
-import java.sql.Date;
-import java.util.Calendar;
-
-public class CalendarEx {
-	
-	public void me2() {
-		Calendar c = Calendar.getInstance();
-		int year =c.get(Calendar.YEAR);
-		int month=c.get(Calendar.MONTH)+1;
-		int date = c.get(Calendar.DAY_OF_MONTH);
-		int day = c.get(Calendar.DAY_OF_WEEK);
-		
-		System.out.println(String.format("%s년%s월%s일%s요일", year,month,date,day ));
-	
-	}
-	public void me3() {
-		Calendar c = Calendar.getInstance();
-		c.set(1950, Calendar.MAY, 25);
-		int day=c.get(Calendar.DAY_OF_WEEK);
-		System.out.println(day);
-	}
-	public void me4() {
-		Calendar c= Calendar.getInstance();
-		c.set(1950, Calendar.FEBRUARY, 25);
-		int maxdate = c.getActualMaximum(Calendar.DAY_OF_MONTH);
-		System.out.println(maxdate);
-		c.set(Calendar.DATE,maxdate);
-		int maxday=c.get(Calendar.DAY_OF_WEEK);
-		//System.out.println(maxday);
-		
-		String[] days= {"일","월","화" ,"수" ,"목" ,"금" ,"토"};
-		for(int i=0;i<days.length;i++) {
-			if(maxday-1==i) {
-				System.out.println(days[i]+"요일");
-			}
-		}
-	}
-	public void me6() {
-		Calendar c = Calendar.getInstance();
-		c.set(2020, Calendar.DECEMBER, 12);
-		c.add(Calendar.DATE, 20);
-		
-		System.out.println(c.getTime());
-		
-		Calendar d = (Calendar) c.clone();
-		
-		
-		
-	}
-	
-	public void me7() {
-		
-	}
-	
-
-	
-}
 ----------
 20.11.13)022 -------------------------------------------------------------
 
 자바 컬랙션 프레임 워크 
+
 1. List
 interface다
+
 List<참조자료형> 변수명 = new ArrayList<참조자료형>(); 으로 선언
- ArrayList는 LIst를 상속하는 자식객체
+ ArrayList는 LIst를 상속하는 자식클래스
 <> 는 Generic(상자의 이름)이라 하고, 참조자료형을 입력한다. 그에 맞는 데이터만 넣을 수 있다.
 자료형에 맞지 않는 데이터는 RuntimeException(컴파일 중 Exception)이 발생
 (늘어나는 배열)
@@ -2840,289 +2787,275 @@ List<참조자료형> 변수명 = new ArrayList<참조자료형>(); 으로 선�
 기본자료형은 Wrapper클래스로 넣을 수 있다 Integer, Boolean 등 첫자가 대문자
 객체 삭제시 다음 index의 객채가 그 자리를 빈칸마다 당겨 채워진다.
 객체 삭제시 모든 객체의 인덱스가 변하기 때문에 수정작업이 빈번한 자료는 사용하지 않는다.
+
 add()
 변수명.add(객체변수 또는 객체생성(new 생성자()))로 데이터를 추가한다
+
 get()
 변수명.get(index)로 데이터를 반환한다.
+
 set()
 변수명.set(index, 객체) 로 데이터를 수정한다.
+
 remove()
 변수명.remove(index)로 데이터를 삭제한다.(삭제후 빈 index는 다음 객체가 모두 당겨 온다)
 변수명.remove(객체(데이터))로 데이터를 동등성 비교후 같으면 삭제한다.
 오버라이딩한 인자만 비교후 삭제하기 때문에 남어지 인자는 초기값을 넣어도 무관하다
 (오버라이딩(hash&equals) 하지 않으면 인자가 같아도 동등성이 같지 않아서 삭제안된다)
 반복문을 사용해 여러객체를 한번에 삭제할 경우, 뒤번 index부터 삭제해야 한다
+
 clear()
 변수명.clear();로 List의 모든 객체를 삭제하고 List의 틀만 남는다.(List는 삭제되지 않는다)
+
 출력
 객체를 출력하면 [ ] 안에 객체가 표시된다.(toString 오버라이딩 하지않으면 주소값)
 
-set(객체며) 데이터를 변경한다
 2. Set
-	
 Set interface
 
+- 데이터의 중복을 허용하지 않는다
+데이터 중복여부를 equals() 사용 동등조건을 체크한다
+equals&hash code 오버라이딩으로 동등조건의 인자를 선택할 수 있다.
+
+- 문자열의 대문자와 소문자를 다른 데이터로 인식한다
+ex) "hi".equals("Hi"); -> false
+
+- 입력 순서와 출력 순서 사이에 상관관계가 없다
+list는 입력순서대로 index가 매겨지고 순서대로 출력됨
+
+- index가 없다
+get()가 없다, 객체 호출시 iterator를 사용
+
+- 자식 클래스로 HashSet 
+Set<참조자료형> 변수명 = new HashSet<참조자료형>();
+
+- add()
+Set에 객체를 입력 한다.
+반환형이 boolean으로 입력의 성공과 실패를 반환
+
+- size()
+Set에 저장된 객체들의 개수를 반환(배열의 length)
+
+20.011.16)023-------------------------------------------------------------------------------
+
+- remove()
+입력 객체를 삭제한다
+(index가 없기에 Integer의 값을 바로 삭제한다)
+반환형이 boolean으로 입력의 성공과 실패를 반환
+ list에서는 remove(int idx), remove(Object obj)
+ set에는 remove(Object obj), index가 없다
+동등성 비교 한다
+ 
+- clear()
+모든 저장 객체를 삭제하고 Set의 틀만 남는다
+
+- iterator() 반환자?
+ Iterator 인터페이스 자료형으로 데이터 반환
+ ArrayList의 get() if()와 대응 된다.
+
+hasNext()
+ 다음 원소가 남아있으면 true를 반환
+next()
+ 다음 원소를 가져옵니다. 
+remove()
+ 현재 반복자가 가리키고 있는 원소를 삭제
+
+선언
+Interator<참조자료형> it = set.interator;  // it은 변수명이다
+
+데이터 반환1
+while문을 이용해서 set데이터를 획득
+Interator<참조자료형> it = set.interator; 
+ while(it.hasNext()){
+	참조자료형 변수명2= it.next();
+	syso(변수명2);
+}
+
+데이터 반환2
+List에 저장하여 데이터 획득 // 다형성으로 List선언
+ List<참조자료형> list= new ArrayList<참조자료형>();	//list는 변수명이다
+list.addAll(set);	//set은 변수명이다
+syso(list);
+
+데이터 반환3
+ArrayList에 저장하여 데이터 획득
+ArrayList list = new ArrayList();
+list.addAll(set);
+syso(list);
+
+
+ex)
+		Iterator<Apple> it = set.iterator();	
+		while (it.hasNext()) {		// 다음 자료가 없을 때 까지	
+			//sysout(it.next());
+			Apple apple = it.next();	 
+			System.out.println(apple);
+		}
+ex)
+		Iterator<Apple> it = set.iterator();
+		List<Apple> list = new ArrayList<Apple>();
+		while (it.hasNext()) {
+			Apple apple = (Apple) it.next();
+			System.out.println(apple);
+			list.add(apple);
+		}
+		int index=list.indexOf(new Apple("a002", null, null, 0));
+		Apple apple=list.get(index);
+		System.out.println(apple);
+ex2) 
+		ArrayList list = new ArrayList();
+		list.addAll(set);
+		System.out.println(list);
+		int index = list.indexOf(new ("찾을id", 초기값, 초기값...));
+		Apple apple1 = list.get(index);
+		sys.out(apple1);
+ex4)
+		list = new ArrayList<MemberDTO>(set);
+
+[[ 문제 로또 ]]
+
+	public void lotto() {
+		Random rnd = new Random(System.currentTimeMillis());
+		Set<Integer> set = new HashSet<Integer>();
+		while(set.size() < SIZE) {	// set.size() 증감연산자 역할
+			long n=r.nextLong();
+			Random r2 = new Random(n);
+			int num = r2.nextInt(LATR - STATRT +1)+STATRT;
+			set.add(num);			// 추가가 되면 size()가 커진다
+		}
+		System.out.println(sum);
+		System.out.println(set);
+	}
+[[해보기]]
+	// 1~45까지 들어있는 list 에서 랜덤으로 숫자를 빼서(remove이용)
+	//새로운 list를 만든다 size가 6이 되면 출력.
+
+정렬하기
+		List<Integer>list = new ArrayList<Integer>();
+		Iterator<Integer> it =set.iterator();
+		while (it.hasNext()) {
+			Integer integer =  it.next();
+			list.add(integer);
+		}
+- 프레임워크 정렬 -
+
+기본자료형 List의 정렬
+		Collections.sort(list);
+		System.out.println(list);
+
+기본자료형 Set의 정렬(List 로 저장 후 정렬)
+		List<Integer> list = new ArrayList<Integer>();
+		list.addAll(set);
+		Collections.sort(list);
+		System.out.println(list);
+
+참조 자료형의 정렬
+참조자료형 class를  Comparable<Apple>구현하고, 오버라이딩 하고 리턴값으로 비교한다.
+public class Apple implements Serializable, Comparable<Apple>{  // Comparable<참조자료형> 구현
+
+@Override
+	public int compareTo(Apple o) {	// 참조자료형 비교
+		return this.getId().compareTo(o.getId());	// 무엇과 무엇을 비교할 것인지 this의 getid와 o.getid의 동등성 비교
+	}						
+
+
+
 Map interface
+
 HashMap
-
-
-[[ List , ArrayList 학습 ]]
-- 첫번째 객체 꺼내기, 마지막 객체 꺼내기
-- 모든 객체 꺼내기
-- 특정 인덱스 값 변경
-- 득정 인덱스 값 삭제
-- 하나씩 모든 객체 삭제(반복문)
-- 모든 객체 삭제 clear - 틀(상자)는 남아있다.
-1. 자료형이 Apple인 객체만 들어가는 컬렉션프레임워크 작성
-2. 제네릭타입 3,4,5,6을 넣어서 컬렉션프레임워크
-3. 실수객체 3.5, 4.1, 9.8이 들어간 컬렉션프레임워크
-4. StringBffer()가 들어간 컬렉션프레임워크
-5. list 객체 만드세요. 단, thread를 담을 수 있음 
-thread의 익명의 내부클래스 new Runnable()
-6. //list 객체를 만드시오. 단, Map<String, Object>를 담을 수 있음
--
-7.(응용문제)dto클래스 (DB) id,name,age를 갖고있다. -  serializable
- 4개의 객체를 list에 저장하고 list를 반환
-main에서 호출하고 list중 두번째 객체의 이름을 출력
-
 Map은 HashMap이 상속(List - ArrayList의 관계와 같다)
 
-	public void me1() {
-		List<Apple> list = new ArrayList<Apple>();		// 다형성으로 list생성, 자료형이 Apple인 객체만 들어감
-		list.add(new Apple());
-		ArrayList<Apple> list2 = new ArrayList<Apple>();	// ArrayList는 List를 상속한다. 그래서 부모객체인 List가 객체생성불가
-		
-		list.add(new Apple());	//추가
-		Apple apples = list.get(0);// 첫번째 인덱스 꺼내기
-		System.out.println(apples);// 출력
-		apples = list.get(list.size()-1);	// 마지막 인덱스 꺼내기
-		System.out.println(apples);// 출력
-				
-		for (int i = 0; i < list.size(); i++) {
-			apples = list.get(i);// 모두출력
-			System.out.println(apples);
-		}
-		list.remove(0);// 특정인덱스 삭제
-		
-		for (int i =list.size()-1;i>=0;i--) {
-			list.remove(i);//하나씩 모두 삭제 뒤에서부터*
-		}
-		
-		list.clear();// 한번에 모두 삭제
-		
-	}
+Map<k,v> key 와 value
+map의 출력
+{ key=value, key=value, ...} , { key=[ , , ], key=[ , ,], ...}
 
-	public void me2() {
-		// list객체를 만들어주세요. 단, 제네릭 타입은 3,4,5,6을 입력할 수 있게
-		List<Integer> list = new ArrayList<Integer>();
-		//정수형 값이 들어갈 컬렉션프레임워크 List 생성
-		list.add(new Integer(3));
-		list.add(new Integer(4));
-		// 원래는 list.add(new Integer(4)); = 기본자료형의 참조자료형(Wrapper클래스) 으로 작성해야하지만
-		list.add(5); // AutoBoxing으로 간단하게 작성
-		list.add(6);
-
-		//AutoUnBoxing으로 Integer a =list.get(0);을 간소하게 작성
-		int a= list.get(0);	// 첫번째 인덱스 추출
-		list.get(list.size()-1);	//마지막 인덱스 추출
-
-		for (int i = 0; i < list.size(); i++) { // 모든 요소 출력
-			int num2 = list.get(i);
-			System.out.println(num2);
-		}
-
-	public void me3() {
-		// list 객체를 만드세요. 단, 3.5, 4.1, 9.8을 입력
-		List<Double> list = new ArrayList<Double>();
-		list.add(3.5);
-		list.add(4.1);
-		list.add(9.8);
-
-		double num = list.get(1);
-
-		for (int i = 0; i < list.size(); i++) {
-			num = list.get(i);
-			System.out.println(num);
-		}
-
-		list.set(list.size() - 1, 1.1); // 마지막 요소값의 변경
-
-		// list에 있는 데이러틑 반복문을 이용해서 전부 삭제
-		for (int i = list.size() - 1; i >= 0; i--) {
-			list.remove(i);
-		}
-
-	}
-
-	public void me4() {
-		// list 객체를 만드세요 단, new StringBuffer()를 담을 수 있음.
-		List<StringBuffer> list = new ArrayList<StringBuffer>();
-		list.add(new StringBuffer());
-
-		// list에 들어있는 모든 데이터를 출력하세요 -> 모든데이터 == 반복문을 사용
-		for (int i = 0; i < list.size(); i++) { // length, size
-			StringBuffer sb = list.get(i);
-			System.out.println(sb);
-		}
-
-		for (int i = list.size() - 1; i >= 0; i--) {
-			list.get(i);
-		}
-
-	}
-
-	public void me5() {
-		// list 객체 만드세요. 단, thread를 담을 수 있음
-		List<Thread> list = new ArrayList<Thread>();
-		list.add(new Thread());
-		list.add(new Thread(new Runnable() { // 익명의 내부클래스
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-
-			}
-		}));
-
-		for (int i = 0; i < list.size(); i++) {
-			Thread t = list.get(i);
-			System.out.println(t);
-		}
-
-	}
-
-	public void me6() {
-		// list 객체를 만드시오. 단, Map<String, Object>를 담을 수 있음
-		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-
-		list.add(new HashMap<String, Object>());
-
-		for (int i = 0; i < list.size(); i++) {
-			Map<String, Object> mso = list.get(i);
-			System.out.println(mso);
-		}
-
-		list.clear(); // 모두 삭제, 상자는 남아있음
-
-	}
-	public List<MemberDTO> me7() {
-		//main()에서 me7호출 ,반환되는 데이터중 두번째 객체의 이름 출력
-		List<MemberDTO> list = new ArrayList<MemberDTO>();
-		
-		list.add(new MemberDTO("m001","kim",5));
-		list.add(new MemberDTO("m002","lee",12));
-		list.add(new MemberDTO("m003","park",53));
-		list.add(new MemberDTO("m004","kang",55));
-		list.add(new MemberDTO("m001","choi",11));
-		
-		return list;
-	}
-
-	Test t1= new Test();
-	List<MemberDTO> list= t1.me7();
-	String name = list.get(1).getName();
-	System.out.println(name);
-
-		public void me8() {
-		List<Apple> list = new ArrayList<Apple>();
-		
-		list.add(new Apple("a001","대구","사과1",1500));
-		list.add(new Apple("a002","대전","사과2",2000));
-		list.add(new Apple("a003","서울","사과3",3000));
-		list.add(new Apple("a004","부산","사과4",2500));
-		list.add(new Apple("a005","청송","사과5",1000));
-		
-		//list에 있는 사과의 지역:이름 을 모두 출력
-		for (int j = 0; j < list.size(); j++) {
-			Apple ap =list.get(j);
-			System.out.println(ap);
-		}
-		//단 idx가 0인 경우 출력제외
-		System.out.println();
-		for (int j = 0; j < list.size(); j++) {
-			Apple ap =list.get(j);
-			if(j == 0){
-				continue;
-			}
-			System.out.println(ap);
-		}
-		// 리스트에 있는 객체중 아이디가 a003과 004인 데이터를 삭제
-		
-		list.remove(new Apple("a003", null, null, 0));
-		list.remove(new Apple("a004", null, null, 0));
-		System.out.println(list);
-		
-		list.clear();
-		System.out.println(list);
-		}
-
-List 어레이리스트
-맵 해쉬맵
-셋 해쉬셋
-
-set
-- 데이터의 중복을 허용하지 않음(중복여부는 equals사용 동등조건.) = 오버라이딩 체크
---> 대소문자는 다른 문자열로 인식한다.
-- 입력 순서와 출력 순서 사이에 상관관계가 없음
--- 그러나 입력순서 대로 중복확인함.
- --> Index가 없다. 그래서 get()없음 대신 iterator사용
-자식클래스 : HashSet
-add()
-get()메서드가 없다.
-size()
-remone(Object obj)
-clear()
-
-	public void me1() {
-		Set<Integer> set = new HashSet<Integer>();
-		set.add(1); // true
-		set.add(2); // true
-		set.add(3); // true
-		set.add(4); // true
-		set.add(5); // true
-		set.add(1); // false반환 . 데이터add안됨
-	}
-
-	public void me2() {
-		Set<String> set = new HashSet<String>();
-
-		set.add("hello"); // true
-		set.add(new String("hello")); // false
-		set.add("hello"); // false
-		set.add("Hello"); // true
-		set.add(new String("Hello")); // false
-		set.add("HELLO"); // true
-		set.add(new String("HELLO")); // false .대소문자는 같지 않다
-
-	}
-
-	public void me3() {
-		Set<Apple> set = new HashSet<Apple>();
-
-		set.add(new Apple("a001", "대구", "사과1", 1500));
-		set.add(new Apple("a002", "대전", "사과2", 2000));
-		set.add(new Apple("a003", "서울", "사과3", 3000));
-		set.add(new Apple("a002", "부산", "사과4", 500)); // false. id가 같음(hash&equals 오버라이딩 id체크)
-		set.add(new Apple("a005", "청송", "사과5", 1000));
-
-	}
-
-	public void me4() {
-		Set<MemberDTO> set = new HashSet<MemberDTO>();
-
-		set.add(new MemberDTO("m001", "kim", 4));
-		set.add(new MemberDTO("m002", "lee", 11));
-		set.add(new MemberDTO("m005", "park", 32));
-		set.add(new MemberDTO("m002", "kang", 43)); // false id동등성비교
-		set.add(new MemberDTO("m005", "choi", 2)); // false
-
-	}
-
-
-Map<k,v> 
-key 와 value
 key
-(Index와 같음, 문자열도 가능) : 중복이면 안돼기 때문에 set을 이용
+(Index와 같음, 문자열, Set 가능) : 중복이면 안돼기 때문에 set을 이용
+
+value
+중복가능. 참조자료형가능
+
+put 
+언어에서 데이터 두개를 입력할 때
+map의 자료 입력(add() 역할)
+put은 키값이 동일하다면 나중에 입력한 값이 그전 값을 덮는다.
+ex)
+		map.put(1, "kim");
+		map.put(1, "kang"); --> kim이 kang으로 변한다.
+ex)		
+		Map<String, List<String>> map = new HashMap<String, List<String>>();
+		map.put("진돗개", list1);
+		map.put("세퍼드", list2);
+
+
+
+
+[[set 연습문제]]
+1. 정수 5개 넣기.
+- 사이즈 출력하기
+  iterator이용해 set전부 출력하기
+ iterator이용해 set을 arraylist에 넣기
+ while문 밖에서 특정인자의 인덱스를 검색해 출력하기
+삭제하기 클리어하기
+정렬해서 출력하기
+
+2.hello Hello HELLO
+ 사이즈 
+iterator전부출력
+arraylist = new arraylist
+인덱스 검색해 출력
+정렬해서 출력하기
+
+3. 애플 
+사이즈
+배열을 이용해 set을 저장하기
+arraylist 에 넣기 전부출력하기
+인덱스 검색하기, 출력하기
+정렬해서 출력하기
+
+4. 멤버DTO
+사이즈
+list = new ArrayList<MemberDTO>(set);
+그중 id m005의 age를 출력
+정렬해서 출력하기
+
+5. 로또 만들기  1~45까지 6개 중복x
+
+[[Map 연습문제]]
+1.key: String value: integer 의 Map 객체 선언
+-데이터의 입력 : 
+비밀번호 , 1234
+전화번호, 01012341234
+집전화번호,0212341234
+비밀번호, 5678
+비밀번호 출력
+집전화번호 삭제
+2.key: String value:Dog
+key: 진돗개
+		(new Dog("d001", "누렁이", "진도인", 3));
+		(new Dog("d002", "백구", "진도인2", 4));
+key: 독일개
+		(new Dog("d003", "happy", "독일인1", 3));
+		(new Dog("d004", "타크", "독일인2", 2));
+-진돗개 전부 출력
+- 독일개 중 타크의 주인 이름만 출력
+
+[Map 응용문제]
+// 파일명.확장자를 입력했을 때 확장자를 비교해 map의 value값을 출력하라(대소문자 구별없이)
+// txt ,png, jpg, avi, mp3 그외는 "시스템파일" 출력
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3147,8 +3080,6 @@ encoding ... 해결했다~
 
 
 
-혁신아이디어공모전
-https://blog.naver.com/kipoworld2/222139323778
 
 
 === 에러 메세지
@@ -3176,54 +3107,14 @@ ArithmeticException
 
 
 
-[[Calendar , Wrapper 연습11.12]]
-	//1.캘린더 객체 생성
-	
-	//2.현재 연도 , 월 , 일 , 요일 을 캘린더에서 추출하여 각각 출력
-		
-	//3.1950.6.25 날짜 출력 set( , ,)
-	// 무슨요일인가?
-	
-	//4. 해당월의 마지막 날은 몇일 까지인가?(30,31,28,29)
-	//4-1 1950년 2월의 마지막 날은 몇일까지인가? 
-	 배열로 일~토 
-	// 마지막날은 무슨 요일인가?
-	
-	//5달력만들기 패스
-	
-	//6.2020년 11월 12일 의 20일후의 날짜는?add
-	//6-1. 20일 후의 날짜 정보. clone()을 이용
 
-	//7.현재 날짜를 Date로 형변환
-	// 20일 후의 날짜가 어떻게 변하나(날짜정보만) roll
-	// 월, 일, 요일 출력
-	
-	//8. 캘린더타입의 형변환
-	// 캘린더 타입 c를 선언하고 데이터 타입 d로 변환
-	// 데이터타입 d를 선언하고 캘린더 타입c로 변환
-	
-	//9.현재 날짜와 시간을 캘린더에서 데이터타입으로 형변환
-	// YYYY-MM-dd-hh-mm-ss형식으로 포멧하여 출력
-//Wrapper
-	//1. 기본자료형의 초기화
-	//2. 레퍼클래스의 초기화
-	//3. //AutoUnBoxing
-		boolean a = new Boolean(false);
-		Character b = new Character('c');
-	//	char bb=b;
-	//4.문자열을 기본자료형으로 변경하는 방법1 parse
-	 * 4-1.문자열을 기본자료형으로 변경하는 방법2 valueof 
-	 * 6. Charater.parse.Charater()와 Charater.valueof()는 없다
-	 * 대신 문자열.chsrAt();을 사용
-//Random
-	랜덤객체생성
-	랜덤값의 범위 (int start~end)출력
-	랜던객체 1,2 생성 같은 시드로 돌리면
+
 
 
 
 [[매일 연습문제, 회원관리 memberDTO]]
 GG + MMS1_me(컬렉션프레임워크 list적용) // 두개 한번씩 
+list.get(idx).execute(sc);
 GG의 체인지웨폰 if대신 예외처리로 변경
 GG. mms에 예외처리해야할 것 
 

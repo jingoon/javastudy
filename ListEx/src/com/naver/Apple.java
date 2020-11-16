@@ -2,7 +2,7 @@ package com.naver;
 
 import java.io.Serializable;
 
-public class Apple implements Serializable{
+public class Apple implements Serializable, Comparable<Apple>{
 
 	/**
 	 * 
@@ -53,7 +53,7 @@ public class Apple implements Serializable{
 	
 	@Override
 	public String toString() {
-		return  id + " : "+ name;
+		return  id +" : "+addr+ " : "+ name;
 	}
 	@Override
 	public int hashCode() {
@@ -77,6 +77,11 @@ public class Apple implements Serializable{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+	@Override
+	public int compareTo(Apple o) {
+		// TODO Auto-generated method stub
+		return this.getId().compareTo(o.getId());// ¹¹¿Í ¹» ºñ±³ÇÒ²«°¡
 	}
 	
 	

@@ -1,21 +1,29 @@
 package com.naver;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Hero {
-	Weapon[] weapons;
+	List<Weapon> listw;
 	Weapon w;
-	public Hero(Weapon[] weapons, Weapon w) {
+	public Hero() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Hero(List<Weapon> listw, Weapon w) {
 		super();
-		this.weapons = weapons;
+		this.listw = listw;
 		this.w = w;
 	}
-	public Weapon[] getWeapons() {
-		return weapons;
+
+	public List<Weapon> getListw() {
+		return listw;
 	}
-	public void setWeapons(Weapon[] weapons) {
-		this.weapons = weapons;
+
+	public void setListw(List<Weapon> listw) {
+		this.listw = listw;
 	}
+
 	public Weapon getW() {
 		return w;
 	}
@@ -26,11 +34,12 @@ public class Hero {
 		w.attack(mon);
 	}
 	public void chageWeapon(int idx) {
-		if(idx>=weapons.length || idx<0) {
-			idx=weapons.length-1;
-			
-		}
-		w= weapons[idx];
+			try {
+				idx=listw.size()-1;
+			} catch (Exception e) {
+				w= listw.get(0);
+			}
+	
 		System.out.println(String.format("[%s],[%d]·Î º¯°æµÊ", w,w.getPower()));
 	}
 	

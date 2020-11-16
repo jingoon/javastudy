@@ -1,6 +1,7 @@
 package com.naver;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -148,9 +149,13 @@ public class Test {
 		
 		list.add(new Apple("a001","대구","사과1",1500));
 		list.add(new Apple("a002","대전","사과2",2000));
+		list.add(new Apple("a005","청송","사과5",1000));
 		list.add(new Apple("a003","서울","사과3",3000));
 		list.add(new Apple("a004","부산","사과4",2500));
-		list.add(new Apple("a005","청송","사과5",1000));
+		System.out.println(">>>>>>>>>>>>>>>>>");
+		Collections.sort(list);
+		System.out.println(list);
+		System.out.println(">>>>>>>>>>>>>>>>>");
 		
 		//list에 있는 사과의 지역:이름 을 모두 출력
 		for (int j = 0; j < list.size(); j++) {
