@@ -2381,7 +2381,7 @@ ex)
 	public void me2() {
 		System.out.println("진짜익명 호출용");
 	}
-	}
+	
 		main)				Console)
 		Test01 t01 = new Test01();		
 		t01.me2();			// 진짜 익명 
@@ -2883,60 +2883,6 @@ ArrayList list = new ArrayList();
 list.addAll(set);
 syso(list);
 
-
-ex)
-		Iterator<Apple> it = set.iterator();	
-		while (it.hasNext()) {		// 다음 자료가 없을 때 까지	
-			//sysout(it.next());
-			Apple apple = it.next();	 
-			System.out.println(apple);
-		}
-ex)
-		Iterator<Apple> it = set.iterator();
-		List<Apple> list = new ArrayList<Apple>();
-		while (it.hasNext()) {
-			Apple apple = (Apple) it.next();
-			System.out.println(apple);
-			list.add(apple);
-		}
-		int index=list.indexOf(new Apple("a002", null, null, 0));
-		Apple apple=list.get(index);
-		System.out.println(apple);
-ex2) 
-		ArrayList list = new ArrayList();
-		list.addAll(set);
-		System.out.println(list);
-		int index = list.indexOf(new ("찾을id", 초기값, 초기값...));
-		Apple apple1 = list.get(index);
-		sys.out(apple1);
-ex4)
-		list = new ArrayList<MemberDTO>(set);
-
-[[ 문제 로또 ]]
-
-	public void lotto() {
-		Random rnd = new Random(System.currentTimeMillis());
-		Set<Integer> set = new HashSet<Integer>();
-		while(set.size() < SIZE) {	// set.size() 증감연산자 역할
-			long n=r.nextLong();
-			Random r2 = new Random(n);
-			int num = r2.nextInt(LATR - STATRT +1)+STATRT;
-			set.add(num);			// 추가가 되면 size()가 커진다
-		}
-		System.out.println(sum);
-		System.out.println(set);
-	}
-[[해보기]]
-	// 1~45까지 들어있는 list 에서 랜덤으로 숫자를 빼서(remove이용)
-	//새로운 list를 만든다 size가 6이 되면 출력.
-
-정렬하기
-		List<Integer>list = new ArrayList<Integer>();
-		Iterator<Integer> it =set.iterator();
-		while (it.hasNext()) {
-			Integer integer =  it.next();
-			list.add(integer);
-		}
 - 프레임워크 정렬 -
 
 기본자료형 List의 정렬
@@ -2956,9 +2902,60 @@ public class Apple implements Serializable, Comparable<Apple>{  // Comparable<�
 @Override
 	public int compareTo(Apple o) {	// 참조자료형 비교
 		return this.getId().compareTo(o.getId());	// 무엇과 무엇을 비교할 것인지 this의 getid와 o.getid의 동등성 비교
-	}						
+	}
 
+ Iterator의 사용
 
+ex) 모두출력
+		Iterator<Apple> it = set.iterator();	
+		while (it.hasNext()) {		// 다음 자료가 없을 때 까지	
+			//sysout(it.next());
+			Apple apple = it.next();	 
+			System.out.println(apple);
+		}
+ex) List 저장 출력
+		Iterator<Apple> it = set.iterator();
+		List<Apple> list = new ArrayList<Apple>();
+		while (it.hasNext()) {
+			Apple apple = (Apple) it.next();
+			System.out.println(apple);
+			list.add(apple);
+		}
+		int index=list.indexOf(new Apple("a002", null, null, 0));
+		Apple apple=list.get(index);
+		System.out.println(apple);
+ex) ArrayList 저장 출력
+		ArrayList list = new ArrayList();
+		list.addAll(set);
+		System.out.println(list);
+		int index = list.indexOf(new ("찾을id", 초기값, 초기값...));
+		Apple apple1 = list.get(index);
+		sys.out(apple1);
+ex) 간단하게 출력
+		list = new ArrayList<MemberDTO>(set);
+
+기본자료형의 내림차순 정렬하기
+		List<Integer>list = new ArrayList<Integer>();
+		Iterator<Integer> it =set.iterator();
+		while (it.hasNext()) {
+			Integer integer =  it.next();
+			list.add(integer);
+		}
+
+[[ 문제 로또 ]]
+
+	public void lotto() {
+		Random rnd = new Random(System.currentTimeMillis());
+		Set<Integer> set = new HashSet<Integer>();
+		while(set.size() < SIZE) {	// set.size() 증감연산자 역할
+			long n=r.nextLong();
+			Random r2 = new Random(n);
+			int num = r2.nextInt(LATR - STATRT +1)+STATRT;
+			set.add(num);			// 추가가 되면 size()가 커진다
+		}
+		System.out.println(sum);
+		System.out.println(set);
+	}
 
 Map interface
 
@@ -2986,72 +2983,264 @@ ex)
 		Map<String, List<String>> map = new HashMap<String, List<String>>();
 		map.put("진돗개", list1);
 		map.put("세퍼드", list2);
+20.11.17)024--------------------------------------------------------------------------------------
+
+replace() 
+vlaue 값의 수정
+
+keySet()
+key의 묶음(Set으로 만들어짐)
+Set값을 반환
+		//keySet()사용 key와 value를 출력
+		Set<String> set = map.keySet();
+		System.out.println(set);
+		Iterator<String> it = set.iterator();
+		while (it.hasNext()) {
+			String key = it.next();
+			int val = map.get(key);
+			System.out.println(key + ":" + val);
+		}
+
+map.values()
+keySet 으로 val를 뽑는게 더 나아보인다
+value값의 묶음
 
 
 
+		//values()사용 value를 출력
+		Collection<Integer> val = map.values();
+		Iterator<Integer> itVal = val.iterator();
+		while (itVal.hasNext()) {
+			Integer integer =  itVal.next();
+			System.out.println(integer);
+		}
+================
 
-[[set 연습문제]]
-1. 정수 5개 넣기.
-- 사이즈 출력하기
-  iterator이용해 set전부 출력하기
- iterator이용해 set을 arraylist에 넣기
- while문 밖에서 특정인자의 인덱스를 검색해 출력하기
-삭제하기 클리어하기
-정렬해서 출력하기
+Thread
+동시에 움직인다.
 
-2.hello Hello HELLO
- 사이즈 
-iterator전부출력
-arraylist = new arraylist
-인덱스 검색해 출력
-정렬해서 출력하기
+<사용자 Thread 만들기1>
 
-3. 애플 
-사이즈
-배열을 이용해 set을 저장하기
-arraylist 에 넣기 전부출력하기
-인덱스 검색하기, 출력하기
-정렬해서 출력하기
+1.class 클래스명 extends Thread{
+	public class Test extends Thread{
 
-4. 멤버DTO
-사이즈
-list = new ArrayList<MemberDTO>(set);
-그중 id m005의 age를 출력
-정렬해서 출력하기
+2.(Shift+Alt+s)  Override/Implements Methods드 - run() 오버라이드. 
+	@Override
+	public void run() {	
+		me1();	// thread실행코드
+	}
 
-5. 로또 만들기  1~45까지 6개 중복x
+3. Main()에서 class로 객체를 만든다.
+	Test t1 = new Test();
 
-[[Map 연습문제]]
-1.key: String value: integer 의 Map 객체 선언
--데이터의 입력 : 
-비밀번호 , 1234
-전화번호, 01012341234
-집전화번호,0212341234
-비밀번호, 5678
-비밀번호 출력
-집전화번호 삭제
-2.key: String value:Dog
-key: 진돗개
-		(new Dog("d001", "누렁이", "진도인", 3));
-		(new Dog("d002", "백구", "진도인2", 4));
-key: 독일개
-		(new Dog("d003", "happy", "독일인1", 3));
-		(new Dog("d004", "타크", "독일인2", 2));
--진돗개 전부 출력
-- 독일개 중 타크의 주인 이름만 출력
+4. 객체.start() 를 호출한다.
+	t1.start();			//스레드 생성 후 run()을 실행 한다.
 
-[Map 응용문제]
-// 파일명.확장자를 입력했을 때 확장자를 비교해 map의 value값을 출력하라(대소문자 구별없이)
-// txt ,png, jpg, avi, mp3 그외는 "시스템파일" 출력
+ ex)
+public class Test extends Thread{ // 1.thread 상속
+	@Override		//2. 오버라이드
+	public void run() {	// thread실행코드
+		me1();
+	}
+	public void me1() {
+		for(int i=0; i<10;i++) {
+			System.out.println("Test1: "+i);
+			try {
+				Thread.sleep(1000);	// 1s마다 쉬면서 출력(1000밀리세컨즈)
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}
+
+public class MainEx {
+	public static void main(String[] args) {
+		Test t1 = new Test();	//3. 스레드객체선언
+		t1.start();			//4. 스레드생성
+	}
+}
+
+<사용자 Thread 만들기2>
+ 특정 클래스를 상속하였을 때 Thread를 이중 상속할 수 없으므로(단일상속원칙)
+ Runable을 구현하여 Thread객체를 생성 할 수 있다.
+
+1.class 클래스명 extends Thread implemets Runable{
+	public class Test4 extends Unit implements Runnable{
+2. Override
+	@Override
+		public void run() {
+3. Runable 객체선언
+	Test3 r3 = new Test3();
+4. thread 객체생성
+	Thread t3 = new Thread(r3);
+5. run() 호출
+	t3.start();
+
+ex)
+public class Test4 extends Unit implements Runnable{ // 1. Unit을 상속했을 때
+	@Override				// 2. Override run()
+	public void run() {
+		for (int i = 0; i < 10; i++) {		// 실행코드
+			System.out.println("Test4: "+i*100);
+			try {
+				Thread.sleep(1000);		//1초마다 쉰다
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}
+public class MainEx {
+	public static void main(String[] args) {
+		Test t3 = new Test3();	//3. Runable 객체선언
+		Thread t3 = new Thread(r3);	//4. thread 객체선언
+		t3.start();			//5. 스레드 생성 
+	}
+}
+
+<사용자 Thread 만들기3>
+익명의 객체를 사용, 일회용으로 한번만 실행된다.
+Main() - new Thread(new Runable(){ 
+		// 오버라이드 실행내용.
+	 }).start();
+ex)
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				System.out.println("통신 등을 구현할 때, 자주 쓰는 스레드");
+			}
+		}).start();	//익명의 객체를 바로 호출 , 일회용
+
+start()메서드를 호출하면 그 때 스레드가 생성.
+스레드들간의 데이터는 공유된다
+단, stack 영역의 데이터는 공유불가
+
+(클래스,스텍,힙)의 메모리 구조가 또다시 생성된다.(첫 스레드는 main)
+스레드가 생성되면 스레드는 runnable 상태가 된다
+
+스레드의 생애주기(Life Cycle)
+1. -생성		 - runnable상태	 - runnig상태 	- dead
+(start() 호출)			(run() 실행)	(소멸)
+- 생성과 소멸 중간에는 runnable-blocked- runnig이 반복된다.
+
+스타트메서드가 호출되면 그때 스레드가 생성되고 스레드들간의 데이터는 공유된다
+단 스텍영역의 데이터는 공유불가이다
+또다른 클래스.스텍.힙의 메모리 구조가 스레드생성시 같이 생성된다 첫 메모리구조(스레드는 메인)
+스레드가 생성되면 스레드는 런어블 상태가 된다
+런메서드가 실행되면 러닝상태가 되고 런어블상태와 러닝상태를 반복하다 실행이 다 끝나면 소멸한다
+
+ex)
+스레드의 영역
+main(): main스레드 영역
+run(): 사용자스레드 영역(Test class의 run())
+
+
+join()	*중요* 
+이 메서드를 호출한 스레드는 현재영역(main)을 관리하는 스레드보다 먼저 dead상태로 빠진다.
+(주-이거 급해 먼저 끝내야함->이라고 선언역영 스레드에게 전한다)
+
+ 문도스레드(사용자스레드1)가 메인스레드보다 항상 먼저 dead가 되도록 하려면?
+main영역에 t1.join
+ 로봇스레드(사용자스레드2)가 메인스레드보다 항상 먼저 dead가 되도록 하려면?
+main영역에 t2.join
+
+t1스레드가 메인스레드보다 먼저 데드 상태가 되게 하려면
+t1.join를 메인스레드가 관리하는 영역에서 코딩
+main() 영역에 t1.join(); 
+
+문도t1가 미니언t3보다 항상 먼저 작업이 끝나게 하려면
+t3.run(){ t1.join(); } 
+//t3 는 t1을 파라미터로 받아야함
+
+동기화작업
+ synchronized 동기화메서드
+자물쇠 : 잠겨있다. 자물쇠 1개당 열쇠1개 필요
+자물쇠를 열고 들어가야 코드가 실행됨, 열쇠는 해당 클래스로 만들어진 객체
+-> 하나가 열쇠를 사용하고 있으면 다른 곳에서는 작업을 못하고 있는 경우가 발생
+
+임계영역 : 문제가 발생할 수 있는 메서드에 작성
+데이터를 저장 하는 sum 객체가 있고
+데이터를 연산하는 객체가 있다.
+두개의 스레드를 나눠서 객체가 연산을 수행할 때
+스레드의 연산 작업에서 문제가 발생 할 수 있다.
+이 때 동기화 작업이 필요하다
+=같은 데이터를 공유하는 여러 쓰레드가 있을 때 동기화작업이 필요하다.
+
+	public void subTes(int n) {		//동기화 안했을 때 
+		tes-= n;			//값은 실행때 마다 변할 수 있다
+	}
+	
+	public synchronized void addnum(int n) {	//동기화 했을 때
+		num+=n; 
+	}
+
+synchronized 블럭
+서로 같은 변수(공유)는 같은 열쇠로 변수의 사용이 끝난 다음 사용을 할 수 있게 한다
+서로 다른 변수(공유)는 각기 다른 열쇠로 의미없는 기다림을 없게 한다
+
+synchronized는 공유하는 변수에 대하여 동시 사용을 막음으로 데이터의 안정성을 높이는데
+공유는 하지만 서로 다른 변수에 대하여 의미없는 딜레이가 생기기 때문에 
+사용객체(열쇠)를 정하여 서로다른 변수에 대해서는 동시사용을 하게한다.
+
+Waitnotify
+
+wait() // 얼음하고
+notify() // 땡한다. 땡하면 wait 뒤를 이어 실행
+
+Board 의 String todayPost; 를 
+set하는 스레드와
+get하는 스레드가 있을 때
+스레드는 작업 순서가 작성순서가 아니기 때문에 널포인트 입셉션 발생
+Board에 getTodayPost()가 setTodayPost()보다 나중에 실행되어야함
+ getTodayPost() 에 wait() 를 작성하고 // 잠시멈춤
+ setTodayPost() 애 notify를 작성한다 // 이제 다시 시작해 를 wait가 있는 get에 전달
+
+두 메서드는 todayPost라는 공유 변수를 사용하기 때문에 synchronized로 동기화작업을 해주고
+동시에 사용되면 안되는 같은 변수를 사용하기 때문에 같은 열쇠(this)를 작성한다.
+
+	public String getTodayPost() {
+		if(!isOk) {					// if가 없어도 실행하지만 계속 기다리기만 할때가 있다.
+			synchronized (this) {
+				try {
+					wait();			// 멈춤
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return todayPost;
+	}
+	public void setTodayPost(String todayPost) {
+		this.todayPost = todayPost;
+		isOk = true;				// if문 실행 안하게 변경
+
+		synchronized (this) {			
+			notify();				// 이제 땡~ 하고 넘김 
+		}
+	}
+
+//- set을 사용하는 스레드를 join()해서 get을 사용하는 스레드에 넣어줘도 된다. 
 
 
 
+[Thread Test]
+1. thread생성방법3가지 
+2. thread의 소멸 순서.[ join() test] 3개 1~10까지 05초 쉬면서  세기
+3
+[synchronized]
+1. 값을 저장하는 sum num+=n, minus mNum-=n 객체선언
+2. 값을 연산(for 1~10000)하는 thread 객체 생성
+3. 연산을 두개로 나누어 동시에 실행
+4. synchonized 블럭 , 해당클레스로만든객채(열쇠) 의 구분
 
-
-
-
-
-
+[wait notify] 복합문제
+Board class String msg , ReadThread, WriteThread
+msg 초기값 null
+ReadThread 에서 msg를 출력한다. get
+WriteThread 에서 msg를 "먼저 쓰자"를 입력한다 set
+Board class에서 wait notify, synchronized , try~catch를 작성
+main()이 끝나기전에 두 스레드가 끝나게 코딩
 
 
 
@@ -3111,6 +3300,64 @@ ArithmeticException
 
 
 
+[[set 연습문제]]
+1. 정수 5개 넣기.
+- 사이즈 출력하기
+  iterator이용해 set전부 출력하기
+ iterator이용해 set을 arraylist에 넣기
+ while문 밖에서 특정인자의 인덱스를 검색해 출력하기
+삭제하기 클리어하기
+정렬해서 출력하기
+
+2.hello Hello HELLO
+ 사이즈 
+iterator전부출력
+arraylist = new arraylist
+인덱스 검색해 출력
+정렬해서 출력하기
+
+3. 애플 
+사이즈
+배열을 이용해 set을 저장하기
+arraylist 에 넣기 전부출력하기
+인덱스 검색하기, 출력하기
+정렬해서 출력하기
+
+4. 멤버DTO
+사이즈
+list = new ArrayList<MemberDTO>(set);
+그중 id m005의 age를 출력
+정렬해서 출력하기
+
+5.[set 응용문제]
+1~45까지 들어있는 list 에서 랜덤으로 숫자를 빼서(remove이용)
+새로운 list를 만든다 size가 6이 되면 출력.
+
+[[Map 연습문제]]
+1.key: String value: integer 의 Map 객체 선언
+-데이터의 입력 : 
+비밀번호 , 1234
+전화번호, 01012341234
+집전화번호,0212341234
+비밀번호, 5678
+비밀번호 출력
+집전화번호 삭제
+key값만 출력
+value값만 출력
+
+2.key: String value:Dog
+key: 진돗개
+		(new Dog("d001", "누렁이", "진도인", 3));
+		(new Dog("d002", "백구", "진도인2", 4));
+key: 독일개
+		(new Dog("d003", "happy", "독일인1", 3));
+		(new Dog("d004", "타크", "독일인2", 2));
+-진돗개 전부 출력
+- 독일개 중 타크의 주인 이름만 출력
+
+[Map 응용문제]
+// 파일명.확장자를 입력했을 때 확장자를 비교해 map의 value값을 출력하라(대소문자 구별없이)
+// txt ,png, jpg, avi, mp3 그외는 "시스템파일" 출력
 
 [[매일 연습문제, 회원관리 memberDTO]]
 GG + MMS1_me(컬렉션프레임워크 list적용) // 두개 한번씩 
