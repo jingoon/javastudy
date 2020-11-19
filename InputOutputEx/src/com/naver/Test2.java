@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 
 import org.omg.CosNaming.BindingIteratorOperations;
@@ -191,8 +193,63 @@ public class Test2 {
 					out.close();
 				}
 			} catch (Exception e2) {
-				e2.printStackTrace();			}
+				e2.printStackTrace();		
+				}
 		}
+	}
+	public void me6() {
+		//ObjectStream
+		// DB가 없으니 데이터저장클레스의 memberDTO의 데이터를 텍스트 문서로 만든다
+		//텍스트 문서의 데이터를 읽어 출력한다.
+		MemberDTO dto = new MemberDTO("m001", "철수", 18);
+		OutputStream out = null;
+		ObjectOutputStream oos = null;
+		
+		InputStream in = null;
+		ObjectInputStream ois=null;
+		try {
+			
+			out = new FileOutputStream("obj2.txt");
+			oos = new ObjectOutputStream(out);
+			
+			oos.writeObject(dto);
+			
+			
+			in = new FileInputStream("obj2.txt");
+			ois = new ObjectInputStream(in);
+			Object mdto = ois.readObject();
+			if(mdto.getClass() == mdto.getClass()) {
+				MemberDTO mmdto = (MemberDTO) mdto;
+				System.out.println(mmdto.getAge());
+				System.out.println(mmdto.getId());
+				System.out.println(mmdto.getName());
+			}
+			
+			
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if (oos != null) {
+					oos.close();
+				}
+				if (ois != null) {
+					ois.close();
+				}
+				if (in != null) {
+					in.close();
+				}
+				if (out != null) {
+					out.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		
 	}
 
 	
