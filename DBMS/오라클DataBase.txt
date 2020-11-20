@@ -1,0 +1,162 @@
+오라클 다운로드~
+Oracle Database 11g Release 2 Express Edition for Windows 64
+설치~ go
+sys1234
+Port for 'Oracle Database Listener': 1521
+cmd ->
+sqlplus
+(name)system
+(password)sys1234
+
+cmd 강종했을 때 발생오류~/ 종료할 때는 exit
+ora-01033 orcle initialization or dhutdown in progress
+
+sqlpls "/as sysdba"
+
+sql>
+recover datavase;
+alter database open;
+shutdown immediate;
+startup;
+
+20.11.20)027------------------------------------------------------------------------------------
+[ 오라클의 삭제 ]
+윈도우검색 - regedit - oracl 관련 파일 삭제 ora/ODBC
+내컴퓨터 속성- 고급시스템- path - 오라클path 삭제 
+c 오라클폴더 삭제
+
+아이디 비번을 한번에 적고 로그인
+>sqlplus system/1234
+
+현재 계정 
+system, sys
+
+DB의 객체
+user(계정), table, 함수, sequence, index, trigger, procedure, ...
+
+객체 명령어
+생성은 create [객체]
+수정은 alter
+삭제는 drop
+
+데이터 객체x
+입력, 조회, 수정, 삭제 객체x
+insert, select, update delete 크루드? CreateUpdateReadDelelte
+
+계정을 생성할 때는 일정자격이 있는 계정에서 만든다
+
+show user - 현재유저를 보여줌
+conn ezen/ezen - 유저로그인 (빠져나가 로그인해도 됨)
+
+유저 생성
+create user ezen identified by ezen;
+권한 부여
+grant connect, resource, DBA to ezen;
+권한 철회
+revoke connect, resource, DBA from ezen;
+유저 삭제
+drop user ezen;
+
+객체를 생성, 수정 , 삭제 하는 SQL문
+DDL(Data Definition Language)
+create, alter, drop
+
+보안적인 요소를 담고 있는 SQL문
+DCL
+grant, rollback
+
+TCL
+commit
+
+DML
+insert, select, update, delete
+
+-------*중요*-------
+객체의~
+* creat 생성 : create user ezen identified by ezen;
+* alter 수정 
+*drop 삭제 : drop user
+
+* grant 권한 부여 : grant connect, resource, dba to ezen;
+* revoke 부여 취소 : revoke connect, resource, dba from ezen;
+============
+데이터의~
+* insert 입력
+* select 조회
+* update 수정
+* delete 삭제
+
+* commit 확정
+* rollback 확정취소
+-----------------*11가지--
+
+sql문 입력할 때는 대소문자를 구분X
+데이터는 대소문자 구분O
+숫자를 제외한 모든 자료형은 '작은 따옴표' 입력 
+
+테이블 생성
+ex)
+create table tbl_member(
+id varchar2(6),
+name varchar2(15),
+age number,
+jon varchar2(2),
+birth data
+);
+or
+create table member(mid varchar2(6), name varchar2(15), job varchar2(3), birth date);
+테이블 확인
+desc tbl_member
+테이블 삭제
+drop table member;
+
+테이블에 데이터 입력
+SQL> insert into member (mid) values ('m001');
+1 row created.
+SQL> insert into member (mid, name) values ('m002','kim');
+1 row created.
+SQL> insert into member (mid, name, job) values ('m003', 'lee','a');
+1 row created.
+SQL> insert into member (mid, name, job, birth) values ('m004', 'park','b', '2000-12-17');
+1 row created.
+SQL> insert into member values ('m005','kang','a','1990-10-03' );
+1 row created.
+
+테이블의 데이터 조회
+select * from member;
+
+테이블 데이터의 입력 초기화
+rollback;
+
+
+[SQL문, sqlplus 명령어 연습문제]
+1. sql 객체 명령어 5개
+2. sql 데이터 명령어 6개
+3. 실습 코딩
+- 계정 sss 생성
+- sss에 권한부여 커넥트, 리소스, dba
+- sss로 로그인
+- 현재 계정 확인
+- 다시 원래계정으로 로그인
+- sss에 권한취소
+- sss계정 삭제
+- mem 테이블 생성(id, name, job, birth, sex)
+- mem 확인
+- mem 테이블 데이터 입력.
+- id만 입력
+- name, job 만 입력
+- name, birth, sex 만 입력
+- 모든 칼럼 한번에 입력
+- 테이블의 데이터 조회
+- 테이블의 입력 데이터 초기화(commit전 데이터 롤백)
+- mem 테이블 삭제
+
+
+
+
+
+
+------------------------------------------------------------------------------------
+
+
+
