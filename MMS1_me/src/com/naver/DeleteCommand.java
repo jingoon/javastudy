@@ -6,22 +6,21 @@ public class DeleteCommand implements Command{
 
 	@Override
 	public void execute(Scanner sc) {
-		System.out.println("삭제할 id를 입력해 주세요.");
-		String id = sc.nextLine();
+		System.out.println("삭제할 id를 입력하세요");
+		String id=sc.nextLine();
 		
-		boolean b = DB.db.remove(new MemberDTO(id, null, 0));
-		if(b) {
-			System.out.println(id+"삭제 성공");
-			
+		boolean ok =DB.DBlist.remove(new MemberDTO(id, null, 0));
+		if(ok) {
+			System.out.println(id+"의 Member가 삭제되었습니다");
 		}else {
-			System.out.println(id+"삭제 실패");
+			System.out.println(id+"의 삭제가 실패하였습니다");
 		}
+		
 	}
 
 	@Override
 	public String toString() {
-		return "삭제";
+		return "( 4.회원 삭제 )";
 	}
-	
 
 }
