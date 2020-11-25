@@ -571,15 +571,15 @@ eid를 pk로 설정
 alter table employee add constraint pk_employee_eid primary key(eid)
 
 // 외래키 설정 연습 테이블 만들기
-create table manu(
+create table menu(
 name varchar2(15) primary key,
 price number
 )
 
-insert into manu values ('불고기', 15000)
-insert into manu values ('제육볶음', 20000)
-insert into manu values ('닭도리탕', 25000)
-insert into manu values ('삼계탕', 15000)
+insert into menu values ('불고기', 15000)
+insert into menu values ('제육볶음', 20000)
+insert into menu values ('닭도리탕', 25000)
+insert into menu values ('삼계탕', 15000)
 
 자식테이블
 create table orderm(
@@ -588,7 +588,7 @@ name varchar2(15),
 constraint pk_orderm_tablenum primary key(tablenum)
 )
 
-alter table orderm add constraint fk_orderm_name foreign key(name) references manu(name)
+alter table orderm add constraint fk_orderm_name foreign key(name) references menu(name)
 
 insert into orderm values (01, '불고기')
 insert into orderm values (02, '제육볶음')
@@ -761,6 +761,50 @@ public class MemberDAO {
 		}
 	}
 }
+	public MemberDTO selectBymid(String mid) {
+		MemberDTO dto = null;
+		
+		Connection conn = null;
+		PreparedStatement pstmt= null;
+		String sql = "select * from member where mid=?";
+		ResultSet rs = null;
+		
+		try {
+			conn = DriverManager.getConnection(URL, USER, PASS);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			
+			rs = pstmt.executeQuery(); // rs에 저장된 데이터는 최대 1개, 조건문사용 
+			
+			if (rs.next()) { // rs에 데이터가 있나?
+				String job =rs.getString("job") ;// Label은 별칭
+				String name =rs.getString("name") ;
+				Date birth= rs.getDate("birth");
+				
+				dto= new MemberDTO(mid, name, job, birth);
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return dto;
+	}
 
 
 [문제]
@@ -784,22 +828,109 @@ insert() 만들기
 DB테이블에 입력하기
 delete() 만들기
 DB테이블 레코드 삭제하기
-------
-
-PrepearedStatement
-- 
 
 pstmt.execute(); 전달 값이 입력이 안되면 발생
 java.sql.SQLException: 인덱스에서 누락된 IN 또는 OUT 매개변수:: 1
 
+201125)031--------------------------------------------------------------------------------------
 
 
+executeUpdate() ----- 나머지 drop포함
+executeQuery() ------select
+
+Update
+
+mid값의 컬럼값을 name만 변경
+	public void update(MemberDTO dto) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "Update member set name=?,job=?,birth=? where mid=?"; // ? 순서대로index 1,2,3,4
+		
+		try {
+			
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", USER, PASS);
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getName());
+			pstmt.setString(2, dto.getJob());
+			pstmt.setDate(3, dto.getBirth());
+			pstmt.setString(4,	dto.getMid());
+			
+			pstmt.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+
+main에서
+
+MemberDTO odto= dao2.selectbymid("m005"); // 기존 데이터 가져오기
+MemberDTO dto = new MemberDTO("m005", "lee", odto.getJob(), odto.getBirth()); // 수정 하지 않을 값은 기존데이터로 입력
+dao2.update(dto);
+
+selectBymid
+
+	public MemberDTO selectBymid(String mid) {
+		MemberDTO dto = null;
+		
+		Connection conn = null;
+		PreparedStatement pstmt= null;
+		String sql = "select * from member where mid=?";
+		ResultSet rs = null;
+		
+		try {
+			conn = DriverManager.getConnection(URL, USER, PASS);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			
+			rs = pstmt.executeQuery(); // rs에 저장된 데이터는 최대 1개, 조건문사용 
+			
+			if (rs.next()) { // rs에 데이터가 있나?
+				String job =rs.getString("job") ;// Label은 별칭, 컬럼명은 별칭을 대신함
+				String name =rs.getString("name") ;
+				Date birth= rs.getDate("birth");
+				
+				dto= new MemberDTO(mid, name, job, birth);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return dto;
+	}
 
 
-
-
-
-
+java.sql.SQLException: 부적합한 열 이름
+Date birth=rs.getDate("birth"); 별칭이 있을 때 컬럼명이 아닌 별칭으로 작성
+Date birth=rs.getDate("생일"); 
 
 
 

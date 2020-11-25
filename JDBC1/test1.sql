@@ -287,6 +287,8 @@ select * from orderm
 
 select * from member
 
+update member set name='kim', job='c', birth='1990-12-12' where mid='m005'
+
  
 
 

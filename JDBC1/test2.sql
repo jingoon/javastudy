@@ -24,12 +24,16 @@ age가 null이 아닌 레코드를 조회하시오
 select * from test where age is not null
 
 age가 33보다 큰 레코드 조회
+select * from test where age>33
 
 age가 33보다 크거나 같은 레코드 조회
+select * from test where age>=33
 
 age가 20이거나 23이거나 40인 레코드를 조회(or)
+select * from test where age=20 or age=23 or age=40
 
 age가 20이거나 23이거나 40이거나 43이거나 61이거나 77인 레코드를 조회
+
 
 age가 20이거나 23이거나 40이거나 43이거나 61이거나 77인 레코드가 아닌 레코드를 조회
 
