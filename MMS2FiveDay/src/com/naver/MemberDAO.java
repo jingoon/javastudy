@@ -10,13 +10,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MemberDAO {
-	Command com;
+
 	
 	public MemberDAO() {
 		try {
-			Class.forName(com.DRIVER);
+			Class.forName(Command.DRIVER);
 		} catch (ClassNotFoundException e) {
 			System.out.println("연결실패");
+		}
+	}
+	
+	public void insert(MemberDTO dto) {
+		Connection conn = null;
+		PreparedStatement pst =null;
+		String sql = "insert into member (mid, name, job, birth) values (?,?,?,?)";
+		try {
+			conn=DriverManager.getConnection(Command.URL, Command.USER, Command.PASSWORD);
+			pst=conn.prepareStatement(sql);
+			
+			pst.setString(1, dto.getMid());
+			pst.setString(2, dto.getName());
+			pst.setString(3, dto.getJob());
+			pst.setDate(4, dto.getBirth());
+			pst.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeAll(null, pst, conn);
 		}
 	}
 	
@@ -26,7 +47,7 @@ public class MemberDAO {
 		String sql="update member set name=?, job=? , birth=? where mid=?";
 		
 		try {
-			conn=DriverManager.getConnection(com.URL,com.USER, com.PASSWORD);
+			conn=DriverManager.getConnection(Command.URL,Command.USER, Command.PASSWORD);
 			pst = conn.prepareStatement(sql);
 			
 		//만약 이름만 입력했을 때
@@ -52,7 +73,7 @@ public class MemberDAO {
 		String sql="select * from member where name=?";
 		MemberDTO dto =null;
 		try {
-			conn=DriverManager.getConnection(com.URL,com.USER, com.PASSWORD);
+			conn=DriverManager.getConnection(Command.URL,Command.USER, Command.PASSWORD);
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, name);
 			
@@ -87,7 +108,7 @@ public class MemberDAO {
 		String sql="select * from member where mid=?";
 		MemberDTO dto =null;
 		try {
-			conn=DriverManager.getConnection(com.URL,com.USER, com.PASSWORD);
+			conn=DriverManager.getConnection(Command.URL,Command.USER, Command.PASSWORD);
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, mid);
 			

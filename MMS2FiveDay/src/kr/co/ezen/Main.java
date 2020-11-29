@@ -10,6 +10,7 @@ import com.naver.MemberDAO;
 import com.naver.MemberDTO;
 import com.naver.SelectBymid;
 import com.naver.UpdateCommand;
+import com.naver.insertCommand;
 
 public class Main {
 	public static void main(String[] args) {
@@ -19,6 +20,7 @@ public class Main {
 		List<Command> coms = new ArrayList<Command>();
 		coms.add(new EndCommand());
 		coms.add(new UpdateCommand());
+		coms.add(new insertCommand());
 		
 		
 		while (true) {

@@ -139,7 +139,7 @@ public class UpdateCommand implements Command{
 		if(date<=0 || date> cal.getActualMaximum(Calendar.DAY_OF_MONTH)) {
 			System.out.println("범위를 벗어났습니다");
 			System.out.println("현재 월로 임시저장 합니다.");
-			date=cal.get(cal.gett);
+			date=cal.get(Calendar.DATE);
 		}
 		return date;
 	}
